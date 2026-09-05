@@ -1,0 +1,731 @@
+{
+  "name": "touhou-fumo-companion",
+  "displayName": "Touhou Fumo Companion",
+  "description": "Reactive Touhou fumo companions for VS Code. Feedback and requests for new fumos are welcome.",
+  "publisher": "schermaiolo",
+  "version": "1.0.0",
+  "author": {
+    "name": "Daniel Fridman",
+    "url": "https://github.com/schermaiolo"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schermaiolo/touhou-fumo-companion.git"
+  },
+  "homepage": "https://github.com/schermaiolo/touhou-fumo-companion#readme",
+  "bugs": {
+    "url": "https://github.com/schermaiolo/touhou-fumo-companion/issues"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/schermaiolo"
+  },
+  "icon": "images/icon.png",
+  "vsce": {
+    "baseContentUrl": "https://github.com/schermaiolo/touhou-fumo-companion/blob/main/editors/vscode",
+    "baseImagesUrl": "https://github.com/schermaiolo/touhou-fumo-companion/raw/main/editors/vscode"
+  },
+  "keywords": [
+    "touhou",
+    "fumo",
+    "companion",
+    "desktop pet",
+    "pixel art",
+    "animation",
+    "anime",
+    "youmu",
+    "koishi",
+    "reimu"
+  ],
+  "pricing": "Free",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "touhouFumoPanel",
+          "title": "Touhou Fumo",
+          "icon": "media/fumo-panel.svg"
+        }
+      ]
+    },
+    "views": {
+      "touhouFumoPanel": [
+        {
+          "type": "webview",
+          "id": "touhouFumo.bottomPanelStage",
+          "name": "Fumo Stage",
+          "when": "touhouFumo.bottomPanelEnabled",
+          "contextualTitle": "Touhou Fumo"
+        }
+      ],
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "touhouFumo.explorerStage",
+          "name": "Touhou Fumo",
+          "contextualTitle": "Touhou Fumo",
+          "when": "touhouFumo.explorerStageEnabled",
+          "icon": "media/fumo-panel.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "touhouFumo.startCodingSession",
+        "title": "Start Coding Session",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.closeCodingSession",
+        "title": "Close Coding Session",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.moveCodingSessionBelow",
+        "title": "Move Coding Session Below",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.openSettings",
+        "title": "Open Settings",
+        "category": "Touhou Fumo Companion",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "touhouFumo.customReaction1",
+        "title": "Run Custom Reaction 1",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.customReaction2",
+        "title": "Run Custom Reaction 2",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.customReaction3",
+        "title": "Run Custom Reaction 3",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.customReaction4",
+        "title": "Run Custom Reaction 4",
+        "category": "Touhou Fumo Companion"
+      },
+      {
+        "command": "touhouFumo.reactSelected",
+        "title": "React Selected Fumo",
+        "category": "Touhou Fumo Companion",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "touhouFumo.spinSelected",
+        "title": "Spin Selected Fumo",
+        "category": "Touhou Fumo Companion",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "touhouFumo.crazySpinSelected",
+        "title": "Crazy Spin Selected Fumo",
+        "category": "Touhou Fumo Companion",
+        "icon": "$(rocket)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "touhouFumo.openSettings",
+          "when": "view == touhouFumo.explorerStage",
+          "group": "navigation@9"
+        },
+        {
+          "command": "touhouFumo.reactSelected",
+          "when": "view == touhouFumo.explorerStage",
+          "group": "navigation@6"
+        },
+        {
+          "command": "touhouFumo.spinSelected",
+          "when": "view == touhouFumo.explorerStage",
+          "group": "navigation@7"
+        },
+        {
+          "command": "touhouFumo.crazySpinSelected",
+          "when": "view == touhouFumo.explorerStage",
+          "group": "navigation@8"
+        },
+        {
+          "command": "touhouFumo.reactSelected",
+          "when": "view == touhouFumo.bottomPanelStage",
+          "group": "navigation@6"
+        },
+        {
+          "command": "touhouFumo.spinSelected",
+          "when": "view == touhouFumo.bottomPanelStage",
+          "group": "navigation@7"
+        },
+        {
+          "command": "touhouFumo.crazySpinSelected",
+          "when": "view == touhouFumo.bottomPanelStage",
+          "group": "navigation@8"
+        },
+        {
+          "command": "touhouFumo.openSettings",
+          "when": "view == touhouFumo.bottomPanelStage",
+          "group": "navigation@9"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "Touhou Fumo Companion — General",
+        "type": "object",
+        "properties": {
+          "touhouFumo.codingSession.enabled": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "description": "Enable the free-roaming coding-session view."
+          },
+          "touhouFumo.codingSession.autoStart": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "description": "Automatically open the coding session below the editor when VS Code starts."
+          },
+          "touhouFumo.bottomPanel.enabled": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "description": "Show the Touhou Fumo integrated bottom-panel tab."
+          },
+          "touhouFumo.explorerStage.enabled": {
+            "type": "boolean",
+            "default": true,
+            "scope": "window",
+            "description": "Show the free-roaming Fumo stage at the bottom of the Explorer sidebar."
+          },
+          "touhouFumo.defaults.size": {
+            "type": "number",
+            "default": 100,
+            "minimum": 32,
+            "maximum": 180,
+            "scope": "window",
+            "order": 50,
+            "description": "Default rendered height for characters using General defaults."
+          },
+          "touhouFumo.defaults.idleMovement": {
+            "type": "string",
+            "enum": [
+              "off",
+              "subtle",
+              "bouncy"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Subtle",
+              "Bouncy"
+            ],
+            "default": "bouncy",
+            "scope": "window",
+            "order": 51,
+            "description": "Default idle movement. Subtle is a small bob; Bouncy is a visible hop."
+          },
+          "touhouFumo.defaults.idleMovementFrequency": {
+            "type": "string",
+            "enum": [
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "default": "normal",
+            "scope": "window",
+            "order": 52,
+            "description": "How often idle software movement happens."
+          },
+          "touhouFumo.defaults.randomSpecial": {
+            "type": "string",
+            "enum": [
+              "off",
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Rare",
+              "Normal",
+              "Frequent"
+            ],
+            "default": "normal",
+            "scope": "window",
+            "order": 53,
+            "description": "Random character-specific animation frequency."
+          },
+          "touhouFumo.defaults.randomSpin": {
+            "type": "string",
+            "enum": [
+              "off",
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Rare",
+              "Normal",
+              "Frequent"
+            ],
+            "default": "off",
+            "scope": "window",
+            "order": 54,
+            "description": "Random normal-spin frequency. Characters without spin frames simply ignore it."
+          },
+          "touhouFumo.defaults.crazySpin": {
+            "type": "string",
+            "enum": [
+              "off",
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Rare",
+              "Normal",
+              "Frequent"
+            ],
+            "default": "off",
+            "scope": "window",
+            "order": 55,
+            "description": "Random crazy-spin frequency. The fumo drops from the top while spinning rapidly."
+          },
+          "touhouFumo.defaults.priorityPreset": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "special-first",
+              "quiet"
+            ],
+            "enumItemLabels": [
+              "Standard — Manual > Editor > Crazy Spin > Spin > Unique > Blink",
+              "Special-first — Manual > Editor > Unique > Crazy Spin > Spin > Blink",
+              "Quiet — Manual > Editor > Blink > Unique > Spin > Crazy Spin"
+            ],
+            "default": "standard",
+            "scope": "window",
+            "order": 56,
+            "description": "Priority preset used when animations compete."
+          },
+          "touhouFumo.editorPet.enabled": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "order": 10,
+            "description": "Show a small selected fumo beside the active line of code."
+          },
+          "touhouFumo.editorPet.character": {
+            "type": "string",
+            "enum": [
+              "youmu",
+              "koishi",
+              "reimu",
+              "seija",
+              "sanae",
+              "reimu_lost_word"
+            ],
+            "enumItemLabels": [
+              "Youmu Konpaku",
+              "Koishi Komeiji",
+              "Reimu Hakurei",
+              "Seija Kijin",
+              "Sanae Kochiya",
+              "Reimu Hakurei — Lost Word"
+            ],
+            "default": "youmu",
+            "scope": "window",
+            "order": 11,
+            "description": "Character used by the Editor Pet."
+          },
+          "touhouFumo.editorPet.size": {
+            "type": "number",
+            "default": 10,
+            "minimum": 6,
+            "maximum": 48,
+            "scope": "window",
+            "order": 12,
+            "description": "Editor Pet height in pixels."
+          }
+        }
+      },
+      {
+        "title": "Touhou Fumo Companion — Selected Character",
+        "type": "object",
+        "properties": {
+          "touhouFumo.characterSettings.selected": {
+            "type": "string",
+            "enum": [
+              "youmu",
+              "koishi",
+              "reimu",
+              "seija",
+              "sanae",
+              "reimu_lost_word"
+            ],
+            "enumItemLabels": [
+              "Youmu Konpaku",
+              "Koishi Komeiji",
+              "Reimu Hakurei",
+              "Seija Kijin",
+              "Sanae Kochiya",
+              "Reimu Hakurei — Lost Word"
+            ],
+            "default": "youmu",
+            "scope": "window",
+            "order": 100,
+            "description": "Choose the fumo configured by the controls below."
+          },
+          "touhouFumo.characterSettings.enabled": {
+            "type": "boolean",
+            "default": true,
+            "scope": "window",
+            "order": 101,
+            "description": "Show the selected fumo."
+          },
+          "touhouFumo.characterSettings.useGeneralDefaults": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "order": 102,
+            "description": "Use General size/behavior defaults. Enabled and Manual Message remain character-specific."
+          },
+          "touhouFumo.characterSettings.size": {
+            "type": "number",
+            "default": 95,
+            "minimum": 32,
+            "maximum": 180,
+            "scope": "window",
+            "order": 103,
+            "description": "Rendered height of the selected fumo."
+          },
+          "touhouFumo.characterSettings.idleMovement": {
+            "type": "string",
+            "enum": [
+              "off",
+              "subtle",
+              "bouncy"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Subtle",
+              "Bouncy"
+            ],
+            "default": "bouncy",
+            "scope": "window",
+            "order": 104,
+            "description": "Idle software movement for the selected fumo."
+          },
+          "touhouFumo.characterSettings.idleMovementFrequency": {
+            "type": "string",
+            "enum": [
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "default": "normal",
+            "scope": "window",
+            "order": 105,
+            "description": "How often the selected fumo moves while idle."
+          },
+          "touhouFumo.characterSettings.randomSpecial": {
+            "type": "string",
+            "enum": [
+              "off",
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Rare",
+              "Normal",
+              "Frequent"
+            ],
+            "default": "normal",
+            "scope": "window",
+            "order": 106,
+            "description": "Random unique-animation frequency."
+          },
+          "touhouFumo.characterSettings.randomSpin": {
+            "type": "string",
+            "enum": [
+              "off",
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Rare",
+              "Normal",
+              "Frequent"
+            ],
+            "default": "off",
+            "scope": "window",
+            "order": 107,
+            "description": "Random normal-spin frequency. No spin frames means no action and no error."
+          },
+          "touhouFumo.characterSettings.crazySpin": {
+            "type": "string",
+            "enum": [
+              "off",
+              "rare",
+              "normal",
+              "frequent"
+            ],
+            "enumItemLabels": [
+              "Off",
+              "Rare",
+              "Normal",
+              "Frequent"
+            ],
+            "default": "off",
+            "scope": "window",
+            "order": 108,
+            "description": "Crazy-spin frequency. The fumo falls from the top while spinning rapidly."
+          },
+          "touhouFumo.characterSettings.priorityPreset": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "special-first",
+              "quiet"
+            ],
+            "enumItemLabels": [
+              "Standard — Manual > Editor > Crazy Spin > Spin > Unique > Blink",
+              "Special-first — Manual > Editor > Unique > Crazy Spin > Spin > Blink",
+              "Quiet — Manual > Editor > Blink > Unique > Spin > Crazy Spin"
+            ],
+            "default": "standard",
+            "scope": "window",
+            "order": 109,
+            "description": "Animation priority for the selected fumo."
+          },
+          "touhouFumo.characterSettings.manualMessage": {
+            "type": "string",
+            "default": "Myon!",
+            "scope": "window",
+            "order": 110,
+            "description": "Message shown for manual/click reactions. Leave empty for no bubble."
+          }
+        }
+      },
+      {
+        "title": "Touhou Fumo Companion — Reaction Rules",
+        "type": "object",
+        "properties": {
+          "touhouFumo.reactionRules.selected": {
+            "type": "number",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "enumItemLabels": [
+              "Rule 1",
+              "Rule 2",
+              "Rule 3",
+              "Rule 4",
+              "Rule 5",
+              "Rule 6",
+              "Rule 7",
+              "Rule 8",
+              "Rule 9",
+              "Rule 10",
+              "Rule 11",
+              "Rule 12"
+            ],
+            "default": 1,
+            "scope": "window",
+            "order": 200,
+            "description": "Choose the reaction rule configured below. Twelve reusable rule slots are available."
+          },
+          "touhouFumo.reactionRules.enabled": {
+            "type": "boolean",
+            "default": true,
+            "scope": "window",
+            "order": 201,
+            "description": "Enable the selected reaction rule."
+          },
+          "touhouFumo.reactionRules.trigger": {
+            "type": "string",
+            "enum": [
+              "typing",
+              "newline",
+              "text",
+              "save",
+              "buildStart",
+              "buildSuccess",
+              "buildFailure",
+              "debugStart",
+              "debugEnd",
+              "custom1",
+              "custom2",
+              "custom3",
+              "custom4"
+            ],
+            "enumItemLabels": [
+              "Typing",
+              "Newline / Enter",
+              "Typed Text",
+              "Save",
+              "Build Start",
+              "Build Success",
+              "Build Failure",
+              "Debug Start",
+              "Debug End",
+              "Custom Reaction 1",
+              "Custom Reaction 2",
+              "Custom Reaction 3",
+              "Custom Reaction 4"
+            ],
+            "default": "typing",
+            "scope": "window",
+            "order": 202,
+            "description": "Event that activates the selected rule."
+          },
+          "touhouFumo.reactionRules.triggerText": {
+            "type": "string",
+            "default": "",
+            "scope": "window",
+            "order": 203,
+            "description": "For Typed Text rules, the exact inserted text to react to (for example ';')."
+          },
+          "touhouFumo.reactionRules.target": {
+            "type": "string",
+            "enum": [
+              "all",
+              "random",
+              "youmu",
+              "koishi",
+              "reimu",
+              "seija",
+              "sanae",
+              "reimu_lost_word"
+            ],
+            "enumItemLabels": [
+              "All enabled fumos",
+              "Random enabled fumo",
+              "Youmu Konpaku",
+              "Koishi Komeiji",
+              "Reimu Hakurei",
+              "Seija Kijin",
+              "Sanae Kochiya",
+              "Reimu Hakurei — Lost Word"
+            ],
+            "default": "all",
+            "scope": "window",
+            "order": 204,
+            "description": "Which fumo receives this reaction."
+          },
+          "touhouFumo.reactionRules.action": {
+            "type": "string",
+            "enum": [
+              "none",
+              "blink",
+              "subtle",
+              "bouncy",
+              "special",
+              "spin",
+              "crazy-spin"
+            ],
+            "enumItemLabels": [
+              "Message only / None",
+              "Blink",
+              "Subtle movement",
+              "Bouncy movement",
+              "Unique animation",
+              "Spin",
+              "Crazy Spin"
+            ],
+            "default": "subtle",
+            "scope": "window",
+            "order": 205,
+            "description": "Action performed when the rule fires."
+          },
+          "touhouFumo.reactionRules.text": {
+            "type": "string",
+            "default": "",
+            "scope": "window",
+            "order": 206,
+            "description": "Optional speech-bubble text. Leave empty to show no bubble."
+          },
+          "touhouFumo.reactionRules.tone": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "success",
+              "error"
+            ],
+            "enumItemLabels": [
+              "Normal",
+              "Success",
+              "Error"
+            ],
+            "default": "normal",
+            "scope": "window",
+            "order": 207,
+            "description": "Bubble border style for the selected rule."
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.125.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "esbuild": "^0.28.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}

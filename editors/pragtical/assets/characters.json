@@ -1,0 +1,531 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "render": {
+      "scale": 4,
+      "gapPx": 8
+    },
+    "spriteSheet": {
+      "layout": "grid",
+      "columns": 4,
+      "rows": 1
+    },
+    "animations": {
+      "idle": {
+        "frames": [
+          0
+        ],
+        "frameDurationMs": 1000,
+        "loops": 1,
+        "holdLastFrameMs": 0
+      },
+      "blink": {
+        "frames": [
+          1
+        ],
+        "frameDurationMs": 170,
+        "loops": 1,
+        "holdLastFrameMs": 0
+      },
+      "special": {
+        "frames": [
+          2,
+          3
+        ],
+        "frameDurationMs": 450,
+        "loops": 2,
+        "holdLastFrameMs": 500
+      }
+    },
+    "behavior": {
+      "motion": {
+        "enabled": true,
+        "mode": "occasional-bob",
+        "idleOnly": true,
+        "amplitudePx": 2,
+        "durationMs": 550,
+        "minIntervalMs": 25000,
+        "maxIntervalMs": 70000
+      },
+      "randomSpecial": {
+        "enabled": true,
+        "minimumIdleMs": 20000,
+        "minIntervalMs": 60000,
+        "maxIntervalMs": 180000
+      }
+    }
+  },
+  "characters": [
+    {
+      "id": "youmu",
+      "displayName": "Youmu Konpaku",
+      "variant": "standard",
+      "enabledByDefault": true,
+      "sourceSheet": "assets/characters/youmu/youmu-sheet.png",
+      "assets": {
+        "directory": "youmu",
+        "sheet": "youmu-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 95
+      },
+      "manualText": "Myon!",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 11,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        },
+        "spin": {
+          "frames": [
+            0,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "frameDurationMs": 90,
+          "loops": 3,
+          "holdLastFrameMs": 0
+        }
+      }
+    },
+    {
+      "id": "koishi",
+      "displayName": "Koishi Komeiji",
+      "variant": "standard",
+      "enabledByDefault": true,
+      "sourceSheet": "assets/characters/koishi/koishi-sheet.png",
+      "assets": {
+        "directory": "koishi",
+        "sheet": "koishi-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 103
+      },
+      "manualText": "Do you see me?",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 11,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        },
+        "spin": {
+          "frames": [
+            0,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "frameDurationMs": 90,
+          "loops": 3,
+          "holdLastFrameMs": 0
+        }
+      }
+    },
+    {
+      "id": "reimu",
+      "displayName": "Reimu Hakurei",
+      "variant": "standard",
+      "enabledByDefault": true,
+      "sourceSheet": "assets/characters/reimu/reimu-sheet.png",
+      "assets": {
+        "directory": "reimu",
+        "sheet": "reimu-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 112
+      },
+      "manualText": "Donate plz",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 11,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        },
+        "spin": {
+          "frames": [
+            0,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "frameDurationMs": 90,
+          "loops": 3,
+          "holdLastFrameMs": 0
+        }
+      }
+    },
+    {
+      "id": "seija",
+      "displayName": "Seija Kijin",
+      "variant": "standard",
+      "enabledByDefault": false,
+      "sourceSheet": "assets/characters/seija/seija-sheet.png",
+      "assets": {
+        "directory": "seija",
+        "sheet": "seija-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 94
+      },
+      "manualText": "Reverse!",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 4,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        }
+      }
+    },
+    {
+      "id": "sanae",
+      "displayName": "Sanae Kochiya",
+      "variant": "standard",
+      "enabledByDefault": false,
+      "sourceSheet": "assets/characters/sanae/sanae-sheet.png",
+      "assets": {
+        "directory": "sanae",
+        "sheet": "sanae-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 104
+      },
+      "manualText": "A miracle!",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 4,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        }
+      }
+    },
+    {
+      "id": "reimu_lost_word",
+      "displayName": "Reimu Hakurei — Lost Word",
+      "variant": "lost-word",
+      "enabledByDefault": false,
+      "sourceSheet": "assets/characters/reimu_lost_word/reimu_lost_word-sheet.png",
+      "assets": {
+        "directory": "reimu_lost_word",
+        "sheet": "reimu_lost_word-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 112
+      },
+      "manualText": "Fantasy Nature!",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 4,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        }
+      }
+    }
+  ]
+}

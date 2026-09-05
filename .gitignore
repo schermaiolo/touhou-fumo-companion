@@ -1,0 +1,26 @@
+# Dependencies
+**/node_modules/
+
+# Generated build and test output
+**/out/
+**/dist/
+**/.vscode-test/
+*.vsix
+
+# Python cache / local environments
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Project-local backups created by import/repair tools
+.local-backups/
+**/*.before-*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Desktop/editor files
+.DS_Store
+Thumbs.db

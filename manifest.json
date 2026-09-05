@@ -1,0 +1,24 @@
+{
+  "addons": [
+    {
+      "id": "touhou_fumo_companion",
+      "name": "Touhou Fumo Companion",
+      "description": "Reactive Touhou fumo companions for Pragtical. Feedback and requests for new fumos are welcome.",
+      "version": "1.0.0",
+      "mod_version": "3",
+      "type": "plugin",
+      "path": "editors/pragtical",
+      "tags": [
+        "touhou",
+        "fumo",
+        "animation",
+        "companion",
+        "pixel-art"
+      ],
+      "extra": {
+        "author": "Daniel Fridman (schermaiolo)",
+        "license": "MIT (code/docs; see README for asset notice)"
+      }
+    }
+  ]
+}

@@ -292,7 +292,7 @@ export class ReactionRulesController
 
 		await this.context.globalState.update(
 			STORAGE_KEY,
-			next
+			disableDuplicateRules(next)
 		);
 	}
 
@@ -350,7 +350,7 @@ export class ReactionRulesController
 		const configuration =
 			vscode.workspace.getConfiguration('touhouFumo');
 
-		rules[selected - 1] = normalizeRule(
+		const editedRule = normalizeRule(
 			{
 				enabled: configuration.get<boolean>(
 					`${PREFIX}.enabled`,
@@ -384,6 +384,27 @@ export class ReactionRulesController
 			fallback
 		);
 
+		rules[selected - 1] = editedRule;
+
+		/*
+		 * One event/target pair must have one visual owner. Multiple rules for
+		 * the same event and target used to fire together with identical
+		 * "editor" priority, which produced order-dependent animation races.
+		 * The rule being edited wins and older conflicting slots are disabled.
+		 */
+		if (editedRule.enabled) {
+			for (let index = 0; index < rules.length; index += 1) {
+				if (index === selected - 1) {
+					continue;
+				}
+
+				const other = rules[index];
+				if (rulesConflict(editedRule, other)) {
+					rules[index] = { ...other, enabled: false };
+				}
+			}
+		}
+
 		await this.context.globalState.update(STORAGE_KEY, rules);
 	}
 
@@ -393,6 +414,46 @@ export class ReactionRulesController
 			Array.from(DEFAULT_RULES)
 		);
 	}
+}
+
+/**
+ * Keep only the first enabled rule for an identical event/target pair.
+ * Typed-text rules are distinct when their trigger text differs.
+ */
+function disableDuplicateRules(
+	rules: readonly ReactionRule[]
+): ReactionRule[] {
+	const seen = new Set<string>();
+
+	return rules.map((rule) => {
+		if (!rule.enabled) {
+			return rule;
+		}
+
+		const key = ruleConflictKey(rule);
+		if (seen.has(key)) {
+			return { ...rule, enabled: false };
+		}
+
+		seen.add(key);
+		return rule;
+	});
+}
+
+function rulesConflict(
+	left: ReactionRule,
+	right: ReactionRule
+): boolean {
+	return right.enabled &&
+		ruleConflictKey(left) === ruleConflictKey(right);
+}
+
+function ruleConflictKey(rule: ReactionRule): string {
+	const triggerText = rule.trigger === 'text'
+		? rule.triggerText
+		: '';
+
+	return [rule.trigger, triggerText, rule.target].join('\u0000');
 }
 
 function blankRule(): ReactionRule {

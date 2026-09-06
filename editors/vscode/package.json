@@ -3,7 +3,7 @@
   "displayName": "Touhou Fumo Companion",
   "description": "Reactive Touhou fumo companions for VS Code. Feedback and requests for new fumos are welcome.",
   "publisher": "schermaiolo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Daniel Fridman",
     "url": "https://github.com/schermaiolo"
@@ -572,7 +572,7 @@
             "default": true,
             "scope": "window",
             "order": 201,
-            "description": "Enable the selected reaction rule."
+            "description": "Enable the selected reaction rule. Only one rule can be enabled for the same trigger and target; editing/enabling a conflicting rule disables the older one."
           },
           "touhouFumo.reactionRules.trigger": {
             "type": "string",

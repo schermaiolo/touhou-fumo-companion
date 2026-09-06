@@ -176,6 +176,7 @@ export function getExplorerPetsHtml(
 				motionDurationMs: definition.motionDurationMs,
 				motionAmplitude: definition.movementAmplitude,
 				motionStyle: definition.idleMovement,
+				bubbleHideAt: 0,
 				nextBlinkAt: now + randomBetween(4500, 11000),
 				nextMotionAt: scheduleTime(now, definition.motionMinIntervalMs, definition.motionMaxIntervalMs),
 				nextSpecialAt: scheduleTime(now, definition.specialMinIntervalMs, definition.specialMaxIntervalMs),
@@ -298,14 +299,18 @@ export function getExplorerPetsHtml(
 			pet.nextCrazySpinAt = scheduleTime(now, pet.definition.crazySpinMinIntervalMs, pet.definition.crazySpinMaxIntervalMs);
 		}
 
-		function showBubble(pet, text, tone) {
+		function showBubble(pet, text, tone, hideAt) {
 			if (typeof text !== 'string' || text.trim().length === 0) return;
 			pet.bubble.textContent = text;
 			pet.bubble.classList.remove('normal', 'success', 'error');
 			pet.bubble.classList.add(tone === 'success' || tone === 'error' ? tone : 'normal');
 			pet.bubble.classList.add('visible');
+			pet.bubbleHideAt = Number(hideAt) || 0;
 		}
-		function hideBubble(pet) { pet.bubble.classList.remove('visible'); }
+		function hideBubble(pet) {
+			pet.bubble.classList.remove('visible');
+			pet.bubbleHideAt = 0;
+		}
 
 		// Sprite actions share one lane; software motion is tracked separately.
 		function makeAction(priorityKind, visualKind, frames, durations, text, tone) {
@@ -341,7 +346,7 @@ export function getExplorerPetsHtml(
 			};
 			pet.motionActive = false;
 			setFrame(pet, request.frames[0]);
-			showBubble(pet, request.text, request.tone);
+			showBubble(pet, request.text, request.tone, 0);
 			return true;
 		}
 
@@ -408,6 +413,7 @@ export function getExplorerPetsHtml(
 		}
 
 		function updatePet(pet, now) {
+			if (pet.bubbleHideAt > 0 && now >= pet.bubbleHideAt) hideBubble(pet);
 			updateAction(pet, now);
 			evaluateIdleSpriteActions(pet, now);
 			if (now >= pet.nextMotionAt) {
@@ -429,18 +435,21 @@ export function getExplorerPetsHtml(
 			return pets;
 		}
 
-		// Empty default newline text resolves per character; explicit rule text always wins.
+		// Only the shipped newline->special behavior inherits the character message.
+		// Other rule actions obey the Settings contract: empty text means no bubble.
 		function applyRule(pet, rule, now) {
 			const priorityKind = rule.priorityKind === 'manual' ? 'manual' : 'editor';
 			const ruleText = typeof rule.text === 'string' ? rule.text : '';
 			const text =
-				rule.trigger === 'newline' && ruleText.trim().length === 0
+				rule.trigger === 'newline' &&
+				rule.action === 'special' &&
+				ruleText.trim().length === 0
 					? pet.definition.manualText
 					: ruleText;
 
 			if (rule.action === 'subtle' || rule.action === 'bouncy') {
 				startMotion(pet, now, true, rule.action);
-				if (text.trim().length > 0) requestAction(pet, makeMessageAction(pet, priorityKind, text, rule.tone), now, true);
+				if (text.trim().length > 0) showBubble(pet, text, rule.tone, now + 700);
 				return;
 			}
 			let request;

@@ -471,7 +471,7 @@ local config_spec = {
   },
   {
     label = "Rule Enabled",
-    description = "Enable the selected reaction rule.",
+    description = "Enable the selected reaction rule. Only one rule can be enabled for the same trigger and target; editing/enabling a conflicting rule disables the older one.",
     path = "selected_rule_enabled",
     type = "toggle",
     default = true
@@ -610,6 +610,61 @@ local function rule_prefix(index)
   return "rule_" .. tostring(index) .. "_"
 end
 
+-- Rules with the same event and target would otherwise fire together. Typed
+-- text rules are only duplicates when their trigger text is identical too.
+local function rule_conflict_key(trigger, trigger_text, target)
+  local text = trigger == "text" and tostring(trigger_text or "") or ""
+  return table.concat({
+    tostring(trigger or ""),
+    text,
+    tostring(target or "all")
+  }, "\30")
+end
+
+local function stored_rule_conflict_key(index)
+  local prefix = rule_prefix(index)
+  return rule_conflict_key(
+    settings[prefix .. "trigger"],
+    settings[prefix .. "trigger_text"],
+    settings[prefix .. "target"]
+  )
+end
+
+-- The rule currently being edited wins. Disable any older enabled rule that
+-- owns the same event/target pair so a single editor event has one visual owner.
+local function disable_conflicting_rules(winner_index)
+  local winner_prefix = rule_prefix(winner_index)
+  if settings[winner_prefix .. "enabled"] ~= true then return end
+
+  local winner_key = stored_rule_conflict_key(winner_index)
+  for index = 1, #default_rules do
+    if index ~= winner_index then
+      local prefix = rule_prefix(index)
+      if settings[prefix .. "enabled"] == true and
+         stored_rule_conflict_key(index) == winner_key then
+        settings[prefix .. "enabled"] = false
+      end
+    end
+  end
+end
+
+-- Clean up duplicate rules left by older plugin versions. Preserve the first
+-- enabled slot, matching the VS Code migration behavior.
+local function disable_duplicate_rules()
+  local seen = {}
+  for index = 1, #default_rules do
+    local prefix = rule_prefix(index)
+    if settings[prefix .. "enabled"] == true then
+      local key = stored_rule_conflict_key(index)
+      if seen[key] then
+        settings[prefix .. "enabled"] = false
+      else
+        seen[key] = true
+      end
+    end
+  end
+end
+
 local function selected_rule_snapshot()
   return table.concat({
     tostring(settings.selected_rule_enabled),
@@ -633,6 +688,10 @@ local function save_selected_rule(index)
   settings[prefix .. "action"] = settings.selected_rule_action
   settings[prefix .. "text"] = settings.selected_rule_text or ""
   settings[prefix .. "tone"] = settings.selected_rule_tone
+
+  if settings[prefix .. "enabled"] == true then
+    disable_conflicting_rules(index)
+  end
 end
 
 local function load_selected_rule(index)
@@ -657,6 +716,10 @@ if not character_ids[last_selected_character] then
 end
 load_selected_character(last_selected_character)
 local last_character_snapshot = selected_character_snapshot()
+
+-- Existing installations may already contain conflicting enabled rules.
+-- Normalize them before loading the selected rule into the Settings proxy.
+disable_duplicate_rules()
 
 local last_selected_rule = tonumber(settings.selected_rule) or 1
 if not default_rules[last_selected_rule] then

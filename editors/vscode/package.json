@@ -3,7 +3,7 @@
   "displayName": "Touhou Fumo Companion",
   "description": "Reactive Touhou fumo companions for VS Code. Feedback and requests for new fumos are welcome.",
   "publisher": "schermaiolo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Daniel Fridman",
     "url": "https://github.com/schermaiolo"

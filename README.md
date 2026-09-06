@@ -20,6 +20,20 @@ Animated fumos can react to editor events, spin, perform character-specific anim
 
 ---
 
+## Install
+
+### Visual Studio Code
+
+[![Install from Visual Studio Marketplace](https://img.shields.io/badge/Visual%20Studio%20Marketplace-Install-007ACC)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
+
+Install **Touhou Fumo Companion** directly from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion).
+
+### Pragtical
+
+Installation through the official Pragtical plugin registry is coming.
+
+---
+
 ## Feedback and fumo requests
 
 Bug reports, feedback, animation ideas, and **requests for new fumos** are welcome through GitHub Issues.

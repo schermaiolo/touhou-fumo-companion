@@ -1,21 +1,38 @@
 # Touhou Fumo Companion
-![Touhou Project](https://img.shields.io/badge/Touhou-Project-D0005E?style=for-the-badge)
-![Fumo Companion](https://img.shields.io/badge/Fumo-Companion-8B5CF6?style=for-the-badge)
-![VS Code Extension](https://img.shields.io/badge/VS_Code-Extension-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
-![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Plugin-5B5BD6?style=for-the-badge)
-![Open Source](https://img.shields.io/badge/Open-Source-3DA639?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
-
-Reactive Touhou fumo companions for **VS Code** and **Pragtical**.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif"
-       alt="Touhou Fumo Spin">
+
+[![Touhou Project](https://img.shields.io/badge/Touhou-Project-D0005E?style=for-the-badge)](https://en.touhouwiki.net/)
+[![Fumo Companion](https://img.shields.io/badge/Fumo-Companion-8B5CF6?style=for-the-badge)](https://github.com/schermaiolo/touhou-fumo-companion)
+[![Open Source](https://img.shields.io/badge/Open-Source-3DA639?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+
+</p>
+
+<p align="center">
+
+<p align="center">
+
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-v1.0.2-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
+[![Open VSX Registry](https://img.shields.io/open-vsx/v/schermaiolo/touhou-fumo-companion?style=for-the-badge&label=Open%20VSX)](https://open-vsx.org/extension/schermaiolo/touhou-fumo-companion)
+![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Plugin-5B5BD6?style=for-the-badge)
+
+</p>
+
+</p>
+
+Reactive Touhou fumo companions for **VS Code**, **Open VSX / Code-OSS compatible editors**, and **Pragtical**.
+
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif"
+    alt="Touhou Fumo Spin"
+  >
 </p>
 
 Animated fumos can react to editor events, spin, perform character-specific animations, and be configured independently.
 
-- [VS Code](editors/vscode/README.md)
-- [Pragtical plugin](editors/pragtical/README.md)
+- [VS Code documentation](editors/vscode/README.md)
+- [Pragtical documentation](editors/pragtical/README.md)
 - [Architecture](docs/architecture.md)
 
 ---
@@ -24,13 +41,21 @@ Animated fumos can react to editor events, spin, perform character-specific anim
 
 ### Visual Studio Code
 
-[![Install from Visual Studio Marketplace](https://img.shields.io/badge/Visual%20Studio%20Marketplace-Install-007ACC)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
+[![Install from Visual Studio Marketplace](https://img.shields.io/badge/Visual%20Studio%20Marketplace-Install-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
 
-Install **Touhou Fumo Companion** directly from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion).
+Install **Touhou Fumo Companion** directly from the Visual Studio Marketplace.
+
+### Open VSX / Code-OSS
+
+[![Install from Open VSX](https://img.shields.io/badge/Open%20VSX-Install-C160EF?style=for-the-badge)](https://open-vsx.org/extension/schermaiolo/touhou-fumo-companion)
+
+Install the extension from the **Open VSX Registry** for compatible editors using the Open VSX ecosystem.
 
 ### Pragtical
 
-Installation through the official Pragtical plugin registry is coming.
+![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Plugin%20Manager-5B5BD6?style=for-the-badge)
+
+Installation through the official **Pragtical Plugin Manager** is pending upstream inclusion.
 
 ---
 
@@ -42,6 +67,7 @@ Bug reports, feedback, animation ideas, and **requests for new fumos** are welco
   <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-writing-reactions.gif"
        alt="Writing reactions">
 </p>
+
 ---
 
 ## Credits

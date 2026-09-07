@@ -71,7 +71,7 @@ local default_settings = {
   enabled = true,
   left_margin = 18,
   bottom_margin = 75,
-  gap = 8,
+  gap = 0,
   typing_reaction_cooldown = 0.22,
 
   editor_pet_enabled = false,
@@ -87,19 +87,10 @@ local default_settings = {
   default_crazy_spin = "off",
   default_priority_preset = "standard",
 
+  settings_character =
+    first_definition and first_definition.id or "",
   selected_character =
     first_definition and first_definition.id or "",
-  selected_enabled =
-    first_definition and first_definition.enabled_by_default == true or false,
-  selected_use_general_defaults = false,
-  selected_size = 100,
-  selected_idle_movement = "bouncy",
-  selected_idle_movement_frequency = "normal",
-  selected_random_special = "normal",
-  selected_random_spin = "off",
-  selected_crazy_spin = "off",
-  selected_priority_preset = "standard",
-  selected_manual_message = "",
 
   selected_rule = 1,
   selected_rule_enabled = true,
@@ -254,52 +245,108 @@ for index = 1, #default_rules do
   table.insert(rule_slot_values, { "Rule " .. index, index })
 end
 
-local config_spec = {
-  name = "Touhou Fumo Companion",
+-- Build a dedicated generated settings view for one character. The option
+-- paths intentionally keep the existing flat storage keys (for example
+-- `youmu_enabled`) so current user settings remain fully compatible.
+local function character_config_spec(definition)
+  local id = definition.id
+
+  return {
+    name = definition.name .. " Settings",
+
+    {
+      label = "Enabled",
+      description = "Show " .. definition.name .. " on the stage.",
+      path = setting_key(id, "enabled"),
+      type = "toggle",
+      default = default_settings[setting_key(id, "enabled")]
+    },
+    {
+      label = "Use General Defaults",
+      description = "Use the general size and behavior settings. Enabled and Manual Message stay individual.",
+      path = setting_key(id, "use_general_defaults"),
+      type = "toggle",
+      default = default_settings[setting_key(id, "use_general_defaults")]
+    },
+    {
+      label = "Size",
+      description = "Rendered height in pixels.",
+      path = setting_key(id, "size"),
+      type = "number",
+      default = default_settings[setting_key(id, "size")],
+      min = 32,
+      max = 180
+    },
+    {
+      label = "Movement",
+      description = "Software idle movement.",
+      path = setting_key(id, "idle_movement"),
+      type = "selection",
+      default = default_settings[setting_key(id, "idle_movement")],
+      values = movement_values
+    },
+    {
+      label = "Movement Frequency",
+      description = "How often this fumo moves while idle.",
+      path = setting_key(id, "idle_movement_frequency"),
+      type = "selection",
+      default = default_settings[setting_key(id, "idle_movement_frequency")],
+      values = frequency_values
+    },
+    {
+      label = "Unique Animation",
+      description = "Off or frequency for the unique animation.",
+      path = setting_key(id, "random_special"),
+      type = "selection",
+      default = default_settings[setting_key(id, "random_special")],
+      values = random_frequency_values
+    },
+    {
+      label = "Spin",
+      description = "Off or frequency for normal spin.",
+      path = setting_key(id, "random_spin"),
+      type = "selection",
+      default = default_settings[setting_key(id, "random_spin")],
+      values = random_frequency_values
+    },
+    {
+      label = "Crazy Spin",
+      description = "Off or frequency for the falling crazy spin.",
+      path = setting_key(id, "crazy_spin"),
+      type = "selection",
+      default = default_settings[setting_key(id, "crazy_spin")],
+      values = random_frequency_values
+    },
+    {
+      label = "Priority",
+      description = "Ignored while Use General Defaults is enabled.",
+      path = setting_key(id, "priority_preset"),
+      type = "selection",
+      default = default_settings[setting_key(id, "priority_preset")],
+      values = priority_values
+    },
+    {
+      label = "Manual Message",
+      description = "Click/manual reaction text. Leave empty for no bubble.",
+      path = setting_key(id, "manual_message"),
+      type = "string",
+      default = default_settings[setting_key(id, "manual_message")]
+    }
+  }
+end
+
+local editor_pet_config_spec = {
+  name = "Editor Pet Settings",
 
   {
     label = "Enabled",
-    description = "Show Touhou Fumo companions.",
-    path = "enabled",
-    type = "toggle",
-    default = true
-  },
-  {
-    label = "Left",
-    description = "Distance from the left side of the editor.",
-    path = "left_margin",
-    type = "number",
-    default = 18,
-    min = 0,
-    max = 500
-  },
-  {
-    label = "Bottom",
-    description = "Distance from the bottom of the editor.",
-    path = "bottom_margin",
-    type = "number",
-    default = 75,
-    min = 0,
-    max = 500
-  },
-  {
-    label = "Gap",
-    description = "Space between stage fumos.",
-    path = "gap",
-    type = "number",
-    default = 8,
-    min = 0,
-    max = 100
-  },
-  {
-    label = "Editor Pet",
     description = "Show a small fumo beside the active line.",
     path = "editor_pet_enabled",
     type = "toggle",
     default = false
   },
   {
-    label = "Editor Pet Character",
+    label = "Character",
     description = "Character used beside the active line.",
     path = "editor_pet_character",
     type = "selection",
@@ -307,159 +354,18 @@ local config_spec = {
     values = character_choices
   },
   {
-    label = "Editor Pet Size",
+    label = "Size",
     description = "Small editor-pet height in pixels.",
     path = "editor_pet_size",
     type = "number",
     default = 40,
     min = 20,
     max = 72
-  },
-  {
-    label = "Default Size",
-    description = "Used by characters with Use General Defaults enabled.",
-    path = "default_size",
-    type = "number",
-    default = 100,
-    min = 32,
-    max = 180
-  },
-  {
-    label = "Default Movement",
-    description = "Subtle is a small bob; Bouncy is a visible hop.",
-    path = "default_idle_movement",
-    type = "selection",
-    default = "bouncy",
-    values = movement_values
-  },
-  {
-    label = "Default Movement Frequency",
-    description = "How often idle software movement happens.",
-    path = "default_idle_movement_frequency",
-    type = "selection",
-    default = "normal",
-    values = frequency_values
-  },
-  {
-    label = "Default Unique Animation",
-    description = "Random unique-animation frequency.",
-    path = "default_random_special",
-    type = "selection",
-    default = "normal",
-    values = random_frequency_values
-  },
-  {
-    label = "Default Spin",
-    description = "Characters without spin frames ignore this safely.",
-    path = "default_random_spin",
-    type = "selection",
-    default = "off",
-    values = random_frequency_values
-  },
-  {
-    label = "Default Crazy Spin",
-    description = "Drop from the top while spinning rapidly.",
-    path = "default_crazy_spin",
-    type = "selection",
-    default = "off",
-    values = random_frequency_values
-  },
-  {
-    label = "Default Priority",
-    description = "Priority used when animations compete.",
-    path = "default_priority_preset",
-    type = "selection",
-    default = "standard",
-    values = priority_values
-  },
+  }
+}
 
-  {
-    label = "Character",
-    description = "Choose the fumo configured by the controls below.",
-    path = "selected_character",
-    type = "selection",
-    default = first_definition and first_definition.id or "",
-    values = character_choices
-  },
-  {
-    label = "Character Enabled",
-    description = "Show the selected fumo.",
-    path = "selected_enabled",
-    type = "toggle",
-    default =
-      first_definition and first_definition.enabled_by_default == true or false
-  },
-  {
-    label = "Use Defaults",
-    description = "Use general size/behavior. Enabled and Manual Message stay individual.",
-    path = "selected_use_general_defaults",
-    type = "toggle",
-    default = false
-  },
-  {
-    label = "Character Size",
-    description = "Rendered height in pixels.",
-    path = "selected_size",
-    type = "number",
-    default = 100,
-    min = 32,
-    max = 180
-  },
-  {
-    label = "Movement",
-    description = "Software idle movement.",
-    path = "selected_idle_movement",
-    type = "selection",
-    default = "bouncy",
-    values = movement_values
-  },
-  {
-    label = "Movement Frequency",
-    description = "How often the selected fumo moves while idle.",
-    path = "selected_idle_movement_frequency",
-    type = "selection",
-    default = "normal",
-    values = frequency_values
-  },
-  {
-    label = "Unique Animation",
-    description = "Off or frequency for the unique animation.",
-    path = "selected_random_special",
-    type = "selection",
-    default = "normal",
-    values = random_frequency_values
-  },
-  {
-    label = "Spin",
-    description = "Off or frequency for normal spin.",
-    path = "selected_random_spin",
-    type = "selection",
-    default = "off",
-    values = random_frequency_values
-  },
-  {
-    label = "Crazy Spin",
-    description = "Off or frequency for the falling crazy spin.",
-    path = "selected_crazy_spin",
-    type = "selection",
-    default = "off",
-    values = random_frequency_values
-  },
-  {
-    label = "Priority",
-    description = "Ignored while Use General Defaults is enabled.",
-    path = "selected_priority_preset",
-    type = "selection",
-    default = "standard",
-    values = priority_values
-  },
-  {
-    label = "Message",
-    description = "Click/manual reaction text. Leave empty for no bubble.",
-    path = "selected_manual_message",
-    type = "string",
-    default = ""
-  },
+local reaction_rules_config_spec = {
+  name = "Reaction Rules",
 
   {
     label = "Reaction Rule",
@@ -528,6 +434,171 @@ local config_spec = {
   }
 }
 
+local function open_selected_character_settings()
+  local plugin_settings = config.plugins.touhou_fumo or default_settings
+  local selected_id = plugin_settings.settings_character
+  local definition = nil
+
+  for _, candidate in ipairs(character_definitions) do
+    if candidate.id == selected_id then
+      definition = candidate
+      break
+    end
+  end
+
+  if not definition then
+    core.warn("Touhou Fumo: selected settings character is unavailable")
+    return
+  end
+
+  -- Follow Pragtical's callable subconfig pattern: reuse the generated
+  -- settings view while keeping the plugin context so flat character paths
+  -- (for example `youmu_enabled`) resolve inside config.plugins.touhou_fumo.
+  local settings_plugin = package.loaded["plugins.settings"]
+  if settings_plugin and settings_plugin.show_config then
+    settings_plugin.show_config(
+      definition.name .. " Settings",
+      character_config_spec(definition),
+      "touhou_fumo"
+    )
+  else
+    core.warn("Touhou Fumo: settings plugin not available")
+  end
+end
+
+local config_spec = {
+  name = "Touhou Fumo Companion",
+
+  {
+    label = "Enabled",
+    description = "Show Touhou Fumo companions.",
+    path = "enabled",
+    type = "toggle",
+    default = true
+  },
+  {
+    label = "Left",
+    description = "Horizontal distance in pixels from the left edge of the current Pragtical window. The available visible range changes when the window is resized.",
+    path = "left_margin",
+    type = "number",
+    default = 18,
+    min = 0,
+    max = 500
+  },
+  {
+    label = "Bottom",
+    description = "Vertical distance in pixels from the bottom edge of the current Pragtical window. The available visible range changes when the window is resized.",
+    path = "bottom_margin",
+    type = "number",
+    default = 75,
+    min = 0,
+    max = 500
+  },
+  {
+    label = "Gap",
+    description = "Space in pixels between stage fumos.",
+    path = "gap",
+    type = "number",
+    default = 0,
+    min = 0,
+    max = 100
+  },
+  {
+    label = "Default Size",
+    description = "Used by characters with Use General Defaults enabled.",
+    path = "default_size",
+    type = "number",
+    default = 100,
+    min = 32,
+    max = 180
+  },
+  {
+    label = "Default Movement",
+    description = "Subtle is a small bob; Bouncy is a visible hop.",
+    path = "default_idle_movement",
+    type = "selection",
+    default = "bouncy",
+    values = movement_values
+  },
+  {
+    label = "Default Movement Frequency",
+    description = "How often idle software movement happens.",
+    path = "default_idle_movement_frequency",
+    type = "selection",
+    default = "normal",
+    values = frequency_values
+  },
+  {
+    label = "Default Unique Animation",
+    description = "Random unique-animation frequency.",
+    path = "default_random_special",
+    type = "selection",
+    default = "normal",
+    values = random_frequency_values
+  },
+  {
+    label = "Default Spin",
+    description = "Characters without spin frames ignore this safely.",
+    path = "default_random_spin",
+    type = "selection",
+    default = "off",
+    values = random_frequency_values
+  },
+  {
+    label = "Default Crazy Spin",
+    description = "Drop from the top while spinning rapidly.",
+    path = "default_crazy_spin",
+    type = "selection",
+    default = "off",
+    values = random_frequency_values
+  },
+  {
+    label = "Default Priority",
+    description = "Priority used when animations compete.",
+    path = "default_priority_preset",
+    type = "selection",
+    default = "standard",
+    values = priority_values
+  },
+
+  {
+    label = "Fumo to Configure",
+    description = "Choose which fumo opens when Configure Fumo is pressed.",
+    path = "settings_character",
+    type = "selection",
+    default = first_definition and first_definition.id or "",
+    values = character_choices
+  },
+  {
+    label = "Configure Fumo",
+    description = "Open the selected fumo's dedicated settings page.",
+    type = "button",
+    on_click = open_selected_character_settings
+  },
+  {
+    label = "Editor Pet Settings",
+    description = "Configure the fumo shown beside the active line.",
+    type = "subconfig",
+    title = "Editor Pet Settings",
+    spec = editor_pet_config_spec
+  },
+  {
+    label = "Reaction Rules",
+    description = "Configure reusable editor-event reaction rules.",
+    type = "subconfig",
+    title = "Reaction Rules",
+    spec = reaction_rules_config_spec
+  },
+  {
+    label = "Command Character",
+    description = "Character used by the manual React, Spin and Crazy Spin commands.",
+    path = "selected_character",
+    type = "selection",
+    default = first_definition and first_definition.id or "",
+    values = character_choices
+  }
+}
+
 default_settings.config_spec = config_spec
 
 config.plugins.touhou_fumo = common.merge(
@@ -556,55 +627,8 @@ for id, previous in pairs(legacy_manual_messages) do
 end
 
 -----------------------------------------------------------------------
--- COMPACT SETTINGS PROXY SYNCHRONIZATION
+-- REACTION RULE SETTINGS PROXY SYNCHRONIZATION
 -----------------------------------------------------------------------
-
-local function selected_character_snapshot()
-  return table.concat({
-    tostring(settings.selected_enabled),
-    tostring(settings.selected_use_general_defaults),
-    tostring(settings.selected_size),
-    tostring(settings.selected_idle_movement),
-    tostring(settings.selected_idle_movement_frequency),
-    tostring(settings.selected_random_special),
-    tostring(settings.selected_random_spin),
-    tostring(settings.selected_crazy_spin),
-    tostring(settings.selected_priority_preset),
-    tostring(settings.selected_manual_message)
-  }, "\31")
-end
-
-local function save_selected_character(id)
-  if not id or id == "" or not character_ids[id] then return end
-  settings[setting_key(id, "enabled")] = settings.selected_enabled == true
-  settings[setting_key(id, "use_general_defaults")] =
-    settings.selected_use_general_defaults == true
-  settings[setting_key(id, "size")] = tonumber(settings.selected_size) or 100
-  settings[setting_key(id, "idle_movement")] = settings.selected_idle_movement
-  settings[setting_key(id, "idle_movement_frequency")] =
-    settings.selected_idle_movement_frequency
-  settings[setting_key(id, "random_special")] = settings.selected_random_special
-  settings[setting_key(id, "random_spin")] = settings.selected_random_spin
-  settings[setting_key(id, "crazy_spin")] = settings.selected_crazy_spin
-  settings[setting_key(id, "priority_preset")] = settings.selected_priority_preset
-  settings[setting_key(id, "manual_message")] = settings.selected_manual_message or ""
-end
-
-local function load_selected_character(id)
-  if not id or id == "" or not character_ids[id] then return end
-  settings.selected_enabled = settings[setting_key(id, "enabled")] == true
-  settings.selected_use_general_defaults =
-    settings[setting_key(id, "use_general_defaults")] == true
-  settings.selected_size = settings[setting_key(id, "size")]
-  settings.selected_idle_movement = settings[setting_key(id, "idle_movement")]
-  settings.selected_idle_movement_frequency =
-    settings[setting_key(id, "idle_movement_frequency")]
-  settings.selected_random_special = settings[setting_key(id, "random_special")]
-  settings.selected_random_spin = settings[setting_key(id, "random_spin")]
-  settings.selected_crazy_spin = settings[setting_key(id, "crazy_spin")]
-  settings.selected_priority_preset = settings[setting_key(id, "priority_preset")]
-  settings.selected_manual_message = settings[setting_key(id, "manual_message")] or ""
-end
 
 local function rule_prefix(index)
   return "rule_" .. tostring(index) .. "_"
@@ -707,15 +731,13 @@ local function load_selected_rule(index)
   settings.selected_rule_tone = settings[prefix .. "tone"]
 end
 
--- Important: load real per-character values into the UI at startup. Do not
--- write the generic selected_* defaults back over the character settings.
-local last_selected_character = settings.selected_character
-if not character_ids[last_selected_character] then
-  last_selected_character = first_definition and first_definition.id or ""
-  settings.selected_character = last_selected_character
+-- Keep saved character selectors valid if a character disappeared.
+if not character_ids[settings.settings_character] then
+  settings.settings_character = first_definition and first_definition.id or ""
 end
-load_selected_character(last_selected_character)
-local last_character_snapshot = selected_character_snapshot()
+if not character_ids[settings.selected_character] then
+  settings.selected_character = first_definition and first_definition.id or ""
+end
 
 -- Existing installations may already contain conflicting enabled rules.
 -- Normalize them before loading the selected rule into the Settings proxy.
@@ -729,25 +751,9 @@ end
 load_selected_rule(last_selected_rule)
 local last_rule_snapshot = selected_rule_snapshot()
 
--- Mirror static config_spec proxy controls to persistent per-character/rule fields.
--- Snapshot comparison prevents our own writes from bouncing back recursively.
+-- Reaction rules still use a compact slot selector, so keep only that proxy
+-- synchronized. Character settings are now edited directly by subconfig views.
 local function sync_settings_proxies()
-  local selected = settings.selected_character
-  if selected ~= last_selected_character and character_ids[selected] then
-    save_selected_character(last_selected_character)
-    load_selected_character(selected)
-    last_selected_character = selected
-    last_character_snapshot = selected_character_snapshot()
-    core.redraw = true
-  else
-    local snapshot = selected_character_snapshot()
-    if snapshot ~= last_character_snapshot then
-      save_selected_character(selected)
-      last_character_snapshot = snapshot
-      core.redraw = true
-    end
-  end
-
   local selected_rule = tonumber(settings.selected_rule) or 1
   if selected_rule ~= last_selected_rule and default_rules[selected_rule] then
     save_selected_rule(last_selected_rule)

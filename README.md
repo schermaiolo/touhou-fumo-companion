@@ -14,7 +14,7 @@
 
 [![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-v1.0.2-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
 [![Open VSX Registry](https://img.shields.io/open-vsx/v/schermaiolo/touhou-fumo-companion?style=for-the-badge&label=Open%20VSX)](https://open-vsx.org/extension/schermaiolo/touhou-fumo-companion)
-![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Plugin-5B5BD6?style=for-the-badge)
+[![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Official%20Plugin-5B5BD6?style=for-the-badge)](https://github.com/pragtical/plugins/pull/47)
 
 </p>
 
@@ -53,9 +53,13 @@ Install the extension from the **Open VSX Registry** for compatible editors usin
 
 ### Pragtical
 
-![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Plugin%20Manager-5B5BD6?style=for-the-badge)
+[![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Plugin%20Manager-5B5BD6?style=for-the-badge)](https://github.com/pragtical/plugins)
 
-Installation through the official **Pragtical Plugin Manager** is pending upstream inclusion.
+Install **Touhou Fumo Companion** through the official Pragtical Plugin Manager:
+
+```bash
+ppm install touhou_fumo_companion
+```
 
 ---
 

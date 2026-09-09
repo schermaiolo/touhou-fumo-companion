@@ -502,6 +502,85 @@ export const CHARACTER_DEFINITIONS =
         "maxIntervalMs": 420000
       }
     }
+  },
+  {
+    "id": "mokou",
+    "name": "Fujiwara no Mokou",
+    "variant": "standard",
+    "enabledByDefault": false,
+    "assetDirectory": "mokou",
+    "spriteSheet": "mokou-sheet.png",
+    "framesDirectory": "frames",
+    "frameWidth": 72,
+    "frameHeight": 110,
+    "frameCount": 11,
+    "defaultDisplayHeight": 110,
+    "manualText": "This is fine",
+    "animations": {
+      "idle": {
+        "frames": [
+          0
+        ],
+        "frameDurationMs": 1000,
+        "loops": 1,
+        "holdLastFrameMs": 0
+      },
+      "blink": {
+        "frames": [
+          1
+        ],
+        "frameDurationMs": 170,
+        "loops": 1,
+        "holdLastFrameMs": 0
+      },
+      "special": {
+        "frames": [
+          2,
+          3
+        ],
+        "frameDurationMs": 450,
+        "loops": 2,
+        "holdLastFrameMs": 500
+      },
+      "spin": {
+        "frames": [
+          0,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "frameDurationMs": 90,
+        "loops": 3,
+        "holdLastFrameMs": 0
+      }
+    },
+    "behavior": {
+      "motion": {
+        "enabled": true,
+        "mode": "occasional-hop",
+        "idleOnly": true,
+        "amplitudePx": 3,
+        "durationMs": 550,
+        "minIntervalMs": 25000,
+        "maxIntervalMs": 70000
+      },
+      "randomSpecial": {
+        "enabled": true,
+        "minimumIdleMs": 20000,
+        "minIntervalMs": 60000,
+        "maxIntervalMs": 180000
+      },
+      "randomSpin": {
+        "enabled": false,
+        "minimumIdleMs": 60000,
+        "minIntervalMs": 180000,
+        "maxIntervalMs": 420000
+      }
+    }
   }
 ] as const satisfies
 	readonly GeneratedCharacterDefinition[];

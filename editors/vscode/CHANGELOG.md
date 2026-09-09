@@ -2,6 +2,13 @@
 
 All notable changes to Touhou Fumo Companion will be documented here.
 
+## [1.1.0] - 2026-09-09
+
+### Added
+
+- Add Fujiwara no Mokou.
+- Add a New Fumo showcase section to the project documentation.
+
 ## [1.0.2] - 2026-09-06
 
 ### Fixed

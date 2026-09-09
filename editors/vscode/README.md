@@ -11,6 +11,19 @@ Feedback, bug reports, animation ideas, and **requests for new fumos are welcome
 
 ---
 
+## New Fumo Section: Fujiwara no Mokou
+
+The immortal joins the stage.
+
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/mokou.gif"
+    alt="Fujiwara no Mokou"
+  >
+</p>
+
+---
+
 ## Features
 
 - Multiple independently configurable Touhou fumos.

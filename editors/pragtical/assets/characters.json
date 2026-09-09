@@ -526,6 +526,92 @@
           "holdLastFrameMs": 500
         }
       }
+    },
+    {
+      "id": "mokou",
+      "displayName": "Fujiwara no Mokou",
+      "variant": "standard",
+      "enabledByDefault": false,
+      "sourceSheet": "assets/characters/mokou/mokou-sheet.png",
+      "assets": {
+        "directory": "mokou",
+        "sheet": "mokou-sheet.png",
+        "framesDirectory": "frames"
+      },
+      "render": {
+        "defaultHeight": 110
+      },
+      "manualText": "This is fine",
+      "spriteSheet": {
+        "layout": "grid",
+        "columns": 11,
+        "rows": 1
+      },
+      "behavior": {
+        "motion": {
+          "enabled": true,
+          "mode": "occasional-hop",
+          "idleOnly": true,
+          "amplitudePx": 3,
+          "durationMs": 550,
+          "minIntervalMs": 25000,
+          "maxIntervalMs": 70000
+        },
+        "randomSpecial": {
+          "enabled": true,
+          "minimumIdleMs": 20000,
+          "minIntervalMs": 60000,
+          "maxIntervalMs": 180000
+        },
+        "randomSpin": {
+          "enabled": false,
+          "minimumIdleMs": 60000,
+          "minIntervalMs": 180000,
+          "maxIntervalMs": 420000
+        }
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 1000,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "blink": {
+          "frames": [
+            1
+          ],
+          "frameDurationMs": 170,
+          "loops": 1,
+          "holdLastFrameMs": 0
+        },
+        "special": {
+          "frames": [
+            2,
+            3
+          ],
+          "frameDurationMs": 450,
+          "loops": 2,
+          "holdLastFrameMs": 500
+        },
+        "spin": {
+          "frames": [
+            0,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "frameDurationMs": 90,
+          "loops": 3,
+          "holdLastFrameMs": 0
+        }
+      }
     }
   ]
 }

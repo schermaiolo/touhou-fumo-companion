@@ -4,7 +4,7 @@
       "id": "touhou_fumo_companion",
       "name": "Touhou Fumo Companion",
       "description": "Reactive Touhou fumo companions for Pragtical. Feedback and requests for new fumos are welcome.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "mod_version": "3",
       "type": "plugin",
       "path": "editors/pragtical",

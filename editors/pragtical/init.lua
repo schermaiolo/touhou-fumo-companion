@@ -935,7 +935,7 @@ local function create_pet(definition)
   local special_frames, special_durations = expand_animation(
     definition.animations.special,
     idle_frame,
-    true
+    definition.animations.special.idle_between_frames ~= false
   )
   local spin_frames, spin_durations = expand_animation(
     definition.animations.spin,

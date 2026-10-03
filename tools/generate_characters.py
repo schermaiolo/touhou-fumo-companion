@@ -125,6 +125,7 @@ def animation(
             "frameDurationMs": 120,
             "loops": 1,
             "holdLastFrameMs": 0,
+            "idleBetweenFrames": True,
         }
 
     value = object_value(raw, label)
@@ -160,6 +161,10 @@ def animation(
         "holdLastFrameMs": non_negative_int(
             value.get("holdLastFrameMs", 0),
             f"{label}.holdLastFrameMs",
+        ),
+        "idleBetweenFrames": bool_value(
+            value.get("idleBetweenFrames"),
+            True,
         ),
     }
 
@@ -436,6 +441,7 @@ export interface GeneratedAnimationDefinition {{
 \treadonly frameDurationMs: number;
 \treadonly loops: number;
 \treadonly holdLastFrameMs: number;
+\treadonly idleBetweenFrames: boolean;
 }}
 
 export interface GeneratedCharacterDefinition {{
@@ -552,6 +558,7 @@ def lua_native(definition: dict[str, Any]) -> dict[str, Any]:
             "frame_duration": item["frameDurationMs"] / 1000,
             "loops": item["loops"],
             "hold_last_frame": item["holdLastFrameMs"] / 1000,
+            "idle_between_frames": item["idleBetweenFrames"],
         }
 
     return native

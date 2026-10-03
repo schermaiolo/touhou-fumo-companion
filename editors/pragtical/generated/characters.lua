@@ -24,6 +24,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -32,6 +33,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -41,6 +43,7 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {
@@ -56,6 +59,7 @@ return {
         frame_duration = 0.09,
         loops = 3,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {
@@ -103,6 +107,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -111,6 +116,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -120,6 +126,7 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {
@@ -135,6 +142,7 @@ return {
         frame_duration = 0.09,
         loops = 3,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {
@@ -182,6 +190,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -190,6 +199,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -199,6 +209,7 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {
@@ -214,6 +225,7 @@ return {
         frame_duration = 0.09,
         loops = 3,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {
@@ -261,6 +273,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -269,6 +282,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -278,12 +292,14 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {},
         frame_duration = 0.12,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {
@@ -331,6 +347,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -339,6 +356,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -348,12 +366,14 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {},
         frame_duration = 0.12,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {
@@ -401,6 +421,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -409,6 +430,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -418,12 +440,14 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {},
         frame_duration = 0.12,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {
@@ -471,6 +495,7 @@ return {
         frame_duration = 1.0,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       blink = {
         frames = {
@@ -479,6 +504,7 @@ return {
         frame_duration = 0.17,
         loops = 1,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
       special = {
         frames = {
@@ -488,6 +514,7 @@ return {
         frame_duration = 0.45,
         loops = 2,
         hold_last_frame = 0.5,
+        idle_between_frames = true,
       },
       spin = {
         frames = {
@@ -503,6 +530,90 @@ return {
         frame_duration = 0.09,
         loops = 3,
         hold_last_frame = 0.0,
+        idle_between_frames = true,
+      },
+    },
+    behavior = {
+      motion = {
+        enabled = true,
+        mode = "occasional-hop",
+        idleOnly = true,
+        amplitudePx = 3,
+        durationMs = 550,
+        minIntervalMs = 25000,
+        maxIntervalMs = 70000,
+      },
+      randomSpecial = {
+        enabled = true,
+        minimumIdleMs = 20000,
+        minIntervalMs = 60000,
+        maxIntervalMs = 180000,
+      },
+      randomSpin = {
+        enabled = false,
+        minimumIdleMs = 60000,
+        minIntervalMs = 180000,
+        maxIntervalMs = 420000,
+      },
+    },
+  },
+  {
+    id = "alice",
+    name = "Alice Margatroid",
+    variant = "standard",
+    enabled_by_default = false,
+    asset_directory = "alice",
+    sprite_sheet = "alice-sheet.png",
+    frames_directory = "frames",
+    frame_width = 67,
+    frame_height = 93,
+    frame_count = 11,
+    default_display_height = 93,
+    manual_text = "Burgir.",
+    animations = {
+      idle = {
+        frames = {
+          1,
+        },
+        frame_duration = 1.0,
+        loops = 1,
+        hold_last_frame = 0.0,
+        idle_between_frames = true,
+      },
+      blink = {
+        frames = {
+          2,
+        },
+        frame_duration = 0.17,
+        loops = 1,
+        hold_last_frame = 0.0,
+        idle_between_frames = true,
+      },
+      special = {
+        frames = {
+          3,
+          4,
+        },
+        frame_duration = 0.25,
+        loops = 1,
+        hold_last_frame = 1.0,
+        idle_between_frames = false,
+      },
+      spin = {
+        frames = {
+          1,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+        },
+        frame_duration = 0.09,
+        loops = 3,
+        hold_last_frame = 0.0,
+        idle_between_frames = true,
       },
     },
     behavior = {

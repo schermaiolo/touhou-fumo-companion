@@ -190,7 +190,10 @@ function expandSpecialAnimation(
 						: 0)
 			);
 
-			if (emitted < totalFrames) {
+			if (
+				animation.idleBetweenFrames &&
+				emitted < totalFrames
+			) {
 				frames.push(idleFrame);
 				durations.push(140);
 			}

@@ -8,6 +8,7 @@ export interface GeneratedAnimationDefinition {
 	readonly frameDurationMs: number;
 	readonly loops: number;
 	readonly holdLastFrameMs: number;
+	readonly idleBetweenFrames: boolean;
 }
 
 export interface GeneratedCharacterDefinition {
@@ -76,7 +77,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -84,7 +86,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -93,7 +96,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [
@@ -108,7 +112,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 90,
         "loops": 3,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {
@@ -155,7 +160,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -163,7 +169,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -172,7 +179,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [
@@ -187,7 +195,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 90,
         "loops": 3,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {
@@ -234,7 +243,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -242,7 +252,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -251,7 +262,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [
@@ -266,7 +278,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 90,
         "loops": 3,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {
@@ -313,7 +326,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -321,7 +335,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -330,13 +345,15 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [],
         "frameDurationMs": 120,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {
@@ -383,7 +400,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -391,7 +409,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -400,13 +419,15 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [],
         "frameDurationMs": 120,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {
@@ -453,7 +474,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -461,7 +483,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -470,13 +493,15 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [],
         "frameDurationMs": 120,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {
@@ -523,7 +548,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 1000,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "blink": {
         "frames": [
@@ -531,7 +557,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 170,
         "loops": 1,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       },
       "special": {
         "frames": [
@@ -540,7 +567,8 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 450,
         "loops": 2,
-        "holdLastFrameMs": 500
+        "holdLastFrameMs": 500,
+        "idleBetweenFrames": true
       },
       "spin": {
         "frames": [
@@ -555,7 +583,91 @@ export const CHARACTER_DEFINITIONS =
         ],
         "frameDurationMs": 90,
         "loops": 3,
-        "holdLastFrameMs": 0
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
+      }
+    },
+    "behavior": {
+      "motion": {
+        "enabled": true,
+        "mode": "occasional-hop",
+        "idleOnly": true,
+        "amplitudePx": 3,
+        "durationMs": 550,
+        "minIntervalMs": 25000,
+        "maxIntervalMs": 70000
+      },
+      "randomSpecial": {
+        "enabled": true,
+        "minimumIdleMs": 20000,
+        "minIntervalMs": 60000,
+        "maxIntervalMs": 180000
+      },
+      "randomSpin": {
+        "enabled": false,
+        "minimumIdleMs": 60000,
+        "minIntervalMs": 180000,
+        "maxIntervalMs": 420000
+      }
+    }
+  },
+  {
+    "id": "alice",
+    "name": "Alice Margatroid",
+    "variant": "standard",
+    "enabledByDefault": false,
+    "assetDirectory": "alice",
+    "spriteSheet": "alice-sheet.png",
+    "framesDirectory": "frames",
+    "frameWidth": 67,
+    "frameHeight": 93,
+    "frameCount": 11,
+    "defaultDisplayHeight": 93,
+    "manualText": "Burgir.",
+    "animations": {
+      "idle": {
+        "frames": [
+          0
+        ],
+        "frameDurationMs": 1000,
+        "loops": 1,
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
+      },
+      "blink": {
+        "frames": [
+          1
+        ],
+        "frameDurationMs": 170,
+        "loops": 1,
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
+      },
+      "special": {
+        "frames": [
+          2,
+          3
+        ],
+        "frameDurationMs": 250,
+        "loops": 1,
+        "holdLastFrameMs": 1000,
+        "idleBetweenFrames": false
+      },
+      "spin": {
+        "frames": [
+          0,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "frameDurationMs": 90,
+        "loops": 3,
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
       }
     },
     "behavior": {

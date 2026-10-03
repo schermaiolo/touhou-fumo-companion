@@ -3,7 +3,7 @@
   "displayName": "Touhou Fumo Companion",
   "description": "Reactive Touhou fumo companions for VS Code. Feedback and requests for new fumos are welcome.",
   "publisher": "schermaiolo",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "name": "Daniel Fridman",
     "url": "https://github.com/schermaiolo"
@@ -341,7 +341,8 @@
               "seija",
               "sanae",
               "reimu_lost_word",
-              "mokou"
+              "mokou",
+              "alice"
             ],
             "enumItemLabels": [
               "Youmu Konpaku",
@@ -350,7 +351,8 @@
               "Seija Kijin",
               "Sanae Kochiya",
               "Reimu Hakurei — Lost Word",
-              "Fujiwara no Mokou"
+              "Fujiwara no Mokou",
+              "Alice Margatroid"
             ],
             "default": "youmu",
             "scope": "window",
@@ -381,7 +383,8 @@
               "seija",
               "sanae",
               "reimu_lost_word",
-              "mokou"
+              "mokou",
+              "alice"
             ],
             "enumItemLabels": [
               "Youmu Konpaku",
@@ -390,7 +393,8 @@
               "Seija Kijin",
               "Sanae Kochiya",
               "Reimu Hakurei — Lost Word",
-              "Fujiwara no Mokou"
+              "Fujiwara no Mokou",
+              "Alice Margatroid"
             ],
             "default": "youmu",
             "scope": "window",
@@ -633,7 +637,8 @@
               "seija",
               "sanae",
               "reimu_lost_word",
-              "mokou"
+              "mokou",
+              "alice"
             ],
             "enumItemLabels": [
               "All enabled fumos",
@@ -644,7 +649,8 @@
               "Seija Kijin",
               "Sanae Kochiya",
               "Reimu Hakurei — Lost Word",
-              "Fujiwara no Mokou"
+              "Fujiwara no Mokou",
+              "Alice Margatroid"
             ],
             "default": "all",
             "scope": "window",

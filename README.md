@@ -12,7 +12,7 @@
 
 <p align="center">
 
-[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-v1.0.2-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-v1.2.0-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
 [![Open VSX Registry](https://img.shields.io/open-vsx/v/schermaiolo/touhou-fumo-companion?style=for-the-badge&label=Open%20VSX)](https://open-vsx.org/extension/schermaiolo/touhou-fumo-companion)
 [![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Official%20Plugin-5B5BD6?style=for-the-badge)](https://github.com/pragtical/plugins/pull/47)
 
@@ -37,14 +37,14 @@ Animated fumos can react to editor events, spin, perform character-specific anim
 
 ---
 
-## New Fumo Section: Fujiwara no Mokou
+## New Fumo Section: Alice Margatroid
 
-The immortal joins the stage.
+The Seven-Colored Puppeteer joins the roster. Please ignore the hamburger incident.
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/mokou.gif"
-    alt="Fujiwara no Mokou"
+    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/alice.gif"
+    alt="Alice Margatroid"
   >
 </p>
 

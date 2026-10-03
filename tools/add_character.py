@@ -149,6 +149,7 @@ def animation_override(
     frame_duration_ms: int | None,
     loops: int | None,
     hold_last_frame_ms: int | None,
+    idle_between_frames: bool | None = None,
 ) -> dict[str, Any] | None:
     result: dict[str, Any] = {}
 
@@ -163,6 +164,9 @@ def animation_override(
 
     if hold_last_frame_ms is not None:
         result["holdLastFrameMs"] = hold_last_frame_ms
+
+    if idle_between_frames is not None:
+        result["idleBetweenFrames"] = idle_between_frames
 
     return result or None
 
@@ -202,6 +206,11 @@ def main() -> int:
     parser.add_argument("--special-frame-ms", type=int, default=650)
     parser.add_argument("--special-loops", type=int, default=1)
     parser.add_argument("--special-hold-ms", type=int, default=500)
+    parser.add_argument(
+        "--special-contiguous",
+        action="store_true",
+        help="play special frames directly without inserting idle between them",
+    )
     parser.add_argument("--spin-frame-ms", type=int, default=90)
     parser.add_argument("--spin-loops", type=int, default=2)
     parser.add_argument("--spin-hold-ms", type=int, default=0)
@@ -438,6 +447,7 @@ def main() -> int:
                 arguments.special_frame_ms,
                 arguments.special_loops,
                 arguments.special_hold_ms,
+                False if arguments.special_contiguous else None,
             ),
             "spin": animation_override(
                 frame_sets["spin"],

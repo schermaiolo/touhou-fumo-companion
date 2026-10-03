@@ -514,7 +514,7 @@ export class EditorPetController implements vscode.Disposable {
 				return expandAnimation(
 					this.character.animations.special,
 					this.idleFrame,
-					true
+					this.character.animations.special.idleBetweenFrames
 				);
 		}
 	}

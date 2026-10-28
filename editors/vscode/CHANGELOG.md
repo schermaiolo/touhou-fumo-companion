@@ -2,6 +2,18 @@
 
 All notable changes to Touhou Fumo Companion will be documented here.
 
+## [1.3.0] - 2026-10-28
+
+### Added
+
+- Add Cirno.
+
+## [1.2.0] - 2026-10-02
+
+### Added
+
+- Add Alice Margatroid.
+
 ## [1.1.0] - 2026-09-09
 
 ### Added

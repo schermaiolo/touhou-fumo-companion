@@ -11,17 +11,17 @@ Feedback, bug reports, animation ideas, and **requests for new fumos are welcome
 
 ---
 
-## New Fumo Section: Alice Margatroid
+## New Fumo Section: Cirno
 
-The Seven-Colored Puppeteer joins the roster. Please ignore the hamburger incident.
+The strongest joins the roster. She even studied this time.
+For one brief, glorious moment, Cirno becomes smort.
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/alice.gif"
-    alt="Alice Margatroid"
+    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/cirno.gif"
+    alt="Cirno"
   >
 </p>
-
 ---
 
 ## Features
@@ -44,6 +44,9 @@ The Seven-Colored Puppeteer joins the roster. Please ignore the hamburger incide
 - Youmu Konpaku
 - Koishi Komeiji
 - Reimu Hakurei
+- Fujiwara no Mokou
+- Alice Margatroid
+- Cirno
 - Seija Kijin — no spin
 - Sanae Kochiya — no spin
 - Reimu Hakurei — Lost Word — no spin

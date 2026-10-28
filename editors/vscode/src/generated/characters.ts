@@ -693,6 +693,89 @@ export const CHARACTER_DEFINITIONS =
         "maxIntervalMs": 420000
       }
     }
+  },
+  {
+    "id": "cirno",
+    "name": "Cirno",
+    "variant": "standard",
+    "enabledByDefault": false,
+    "assetDirectory": "cirno",
+    "spriteSheet": "cirno-sheet.png",
+    "framesDirectory": "frames",
+    "frameWidth": 69,
+    "frameHeight": 114,
+    "frameCount": 11,
+    "defaultDisplayHeight": 114,
+    "manualText": "smort",
+    "animations": {
+      "idle": {
+        "frames": [
+          0
+        ],
+        "frameDurationMs": 1000,
+        "loops": 1,
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
+      },
+      "blink": {
+        "frames": [
+          1
+        ],
+        "frameDurationMs": 170,
+        "loops": 1,
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
+      },
+      "special": {
+        "frames": [
+          2,
+          3
+        ],
+        "frameDurationMs": 650,
+        "loops": 1,
+        "holdLastFrameMs": 900,
+        "idleBetweenFrames": false
+      },
+      "spin": {
+        "frames": [
+          0,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "frameDurationMs": 90,
+        "loops": 3,
+        "holdLastFrameMs": 0,
+        "idleBetweenFrames": true
+      }
+    },
+    "behavior": {
+      "motion": {
+        "enabled": true,
+        "mode": "occasional-hop",
+        "idleOnly": true,
+        "amplitudePx": 3,
+        "durationMs": 550,
+        "minIntervalMs": 25000,
+        "maxIntervalMs": 70000
+      },
+      "randomSpecial": {
+        "enabled": true,
+        "minimumIdleMs": 20000,
+        "minIntervalMs": 60000,
+        "maxIntervalMs": 180000
+      },
+      "randomSpin": {
+        "enabled": false,
+        "minimumIdleMs": 60000,
+        "minIntervalMs": 180000,
+        "maxIntervalMs": 420000
+      }
+    }
   }
 ] as const satisfies
 	readonly GeneratedCharacterDefinition[];

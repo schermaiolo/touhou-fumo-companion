@@ -2,6 +2,12 @@
 
 All notable changes to Touhou Fumo Companion will be documented here.
 
+## [1.3.1] - 2026-10-28
+
+### Fixed
+
+- Fix bad spin animation for Cirno.
+
 ## [1.3.0] - 2026-10-28
 
 ### Added

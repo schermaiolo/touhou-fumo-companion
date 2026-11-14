@@ -5,7 +5,7 @@
 import * as assert from 'node:assert/strict';
 import { getSettingsDescriptors, isValidSettingValue, preferredSettingsScope } from '../settingsSchema';
 
-describe('dedicated settings schema', () => {
+suite('dedicated settings schema', () => {
 	const fields = getSettingsDescriptors({
 		contributes: { configuration: [{ properties: {
 			'touhouFumo.editorFlight.enabled': {
@@ -21,14 +21,14 @@ describe('dedicated settings schema', () => {
 		} }] }
 	});
 
-	it('exposes only Touhou Fumo settings in the appropriate sections', () => {
+	test('exposes only Touhou Fumo settings in the appropriate sections', () => {
 		assert.equal(fields.length, 3);
 		assert.equal(fields.find((field) => field.key === 'editorFlight.enabled')?.section, 'movement');
 		assert.equal(fields.find((field) => field.key === 'characterSettings.size')?.section, 'characters');
 		assert.equal(fields.find((field) => field.key === 'reactionRules.trigger')?.section, 'reactions');
 	});
 
-	it('rejects invalid booleans, numbers and enum values', () => {
+	test('rejects invalid booleans, numbers and enum values', () => {
 		const flight = fields.find((field) => field.key === 'editorFlight.enabled')!;
 		const size = fields.find((field) => field.key === 'characterSettings.size')!;
 		const trigger = fields.find((field) => field.key === 'reactionRules.trigger')!;
@@ -42,7 +42,7 @@ describe('dedicated settings schema', () => {
 	});
 
 
-	it('maps manifest integer properties to validated number inputs', () => {
+	test('maps manifest integer properties to validated number inputs', () => {
 		const descriptors = getSettingsDescriptors({ contributes: { configuration: [{ properties: {
 			'touhouFumo.editorFlight.laneWidth': {
 				type: 'integer', minimum: 300, maximum: 1200
@@ -55,14 +55,14 @@ describe('dedicated settings schema', () => {
 		assert.ok(!isValidSettingValue(lane, 150));
 	});
 
-	it('uses the workspace scope only when an override already exists', () => {
+	test('uses the workspace scope only when an override already exists', () => {
 		assert.equal(preferredSettingsScope(undefined), 'user');
 		assert.equal(preferredSettingsScope({ workspaceValue: undefined }), 'user');
 		assert.equal(preferredSettingsScope({ workspaceValue: false }), 'workspace');
 		assert.equal(preferredSettingsScope({ workspaceValue: 0 }), 'workspace');
 	});
 
-	it('gives priority presets readable names without changing stored IDs', () => {
+	test('gives priority presets readable names without changing stored IDs', () => {
 		const descriptors = getSettingsDescriptors({ contributes: { configuration: [{ properties: {
 			'touhouFumo.defaults.priorityPreset': {
 				type: 'string', enum: ['standard', 'special-first', 'quiet']
@@ -75,7 +75,7 @@ describe('dedicated settings schema', () => {
 		assert.ok(preset.options?.[2].label.startsWith('Subtle animations first'));
 	});
 
-	it('rejects unbounded strings', () => {
+	test('rejects unbounded strings', () => {
 		assert.ok(!isValidSettingValue({
 			key: 'x', label: 'X', description: '', type: 'string',
 			section: 'advanced', order: 1

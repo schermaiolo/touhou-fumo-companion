@@ -7,8 +7,8 @@ const base = {
     spriteWidth: 101, spriteHeight: 95, devicePixelRatio: 1.5
 };
 
-describe('Local Fumo handoff geometry (no Wayland execution)', () => {
-    it('keeps the grabbed point fixed across a panel release', () => {
+suite('Local Fumo handoff geometry (no Wayland execution)', () => {
+    test('keeps the grabbed point fixed across a panel release', () => {
         const parsed = parseHandoffGeometry(base);
         assert.ok(parsed);
         assert.deepEqual(deriveLocalHandoff(330, 140, parsed), {
@@ -17,7 +17,7 @@ describe('Local Fumo handoff geometry (no Wayland execution)', () => {
         });
     });
 
-    it('handles releases beyond the left/top boundary without clamping', () => {
+    test('handles releases beyond the left/top boundary without clamping', () => {
         const parsed = parseHandoffGeometry(base);
         assert.ok(parsed);
         const result = deriveLocalHandoff(-20, -10, parsed);
@@ -25,13 +25,13 @@ describe('Local Fumo handoff geometry (no Wayland execution)', () => {
         assert.equal(result.spriteOriginStageY, -74);
     });
 
-    it('preserves logical CSS pixels across fractional display scale', () => {
+    test('preserves logical CSS pixels across fractional display scale', () => {
         const parsed = parseHandoffGeometry({ ...base, devicePixelRatio: 2.5 });
         assert.ok(parsed);
         assert.equal(deriveLocalHandoff(330, 140, parsed).spriteOriginStageX, 284);
     });
 
-    it('rejects invalid, non-finite and oversized geometry', () => {
+    test('rejects invalid, non-finite and oversized geometry', () => {
         assert.equal(parseHandoffGeometry(null), undefined);
         assert.equal(parseHandoffGeometry({ ...base, grabX: Number.NaN }), undefined);
         assert.equal(parseHandoffGeometry({ ...base, grabY: -12 }), undefined);

@@ -33,6 +33,8 @@ import {
 	ReactionRulesController
 } from './reactionRules';
 
+import { HandoffProbeController } from './handoffProbe';
+
 import type {
 	ReactionTrigger
 } from './reactionRules';
@@ -77,15 +79,21 @@ export function activate(
 
 	const reactionRules =
 		new ReactionRulesController(context);
+	const handoffProbe =
+		new HandoffProbeController(context.extensionUri);
 	const explorerStage =
 		new ExplorerStageProvider(
 			context.extensionUri,
-			characterSettings
+			characterSettings,
+			handoffProbe,
+			'Explorer'
 		);
 	const bottomPanelStage =
 		new BottomPanelStageProvider(
 			context.extensionUri,
-			characterSettings
+			characterSettings,
+			handoffProbe,
+			'Bottom Panel'
 		);
 
 	const getBooleanSetting = (
@@ -246,6 +254,7 @@ export function activate(
 		codingSession,
 		characterSettings,
 		reactionRules,
+		handoffProbe,
 
 		vscode.commands.registerCommand(
 			'touhouFumo.startCodingSession',
@@ -287,6 +296,7 @@ export function activate(
 				}
 			}
 		),
+
 		vscode.commands.registerCommand(
 			'touhouFumo.openSettings',
 			() => vscode.commands.executeCommand(
@@ -321,7 +331,8 @@ export function activate(
 					await reactionRules
 						.handleConfigurationChange(event);
 
-					if (characterChanged) {
+					if (characterChanged || event.affectsConfiguration('touhouFumo.physics.enabled') ||
+                        event.affectsConfiguration('touhouFumo.editorFlight.enabled')) {
 						explorerStage.reload();
 						bottomPanelStage.reload();
 						codingSession.reload();

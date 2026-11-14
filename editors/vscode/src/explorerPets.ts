@@ -157,7 +157,14 @@ function toExplorerPetDefinition(
 		crazySpinMaxIntervalMs: crazySpinRange.maximum,
 
 		priorityPreset: effective.priorityPreset,
-		manualText: effective.manualMessage
+		manualText: effective.manualMessage,
+		physicsEnabled: vscode.workspace.getConfiguration('touhouFumo').get<boolean>('physics.enabled', false),
+		handoffProbeEnabled: vscode.workspace.getConfiguration('touhouFumo').get<boolean>('editorFlight.enabled', false),
+		dragPreviewProbeEnabled: vscode.workspace.getConfiguration('touhouFumo').get<boolean>('editorFlight.enabled', false),
+		dragPreviewVmThrowEnabled: false,
+		dragPreviewEditorFlightEnabled: vscode.workspace.getConfiguration('touhouFumo').get<boolean>('editorFlight.enabled', false),
+		dragPreviewLocalFlightEnabled: vscode.workspace.getConfiguration('touhouFumo').get<boolean>('editorFlight.enabled', false),
+		gesturePrewarmEnabled: false
 	};
 }
 

@@ -369,6 +369,34 @@
             "scope": "window",
             "order": 12,
             "description": "Editor Pet height in pixels."
+          },
+          "touhouFumo.physics.enabled": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "description": "Enable drag, flick, gravity and bounce INSIDE the stage only. Native desktop overlays are disabled."
+          },
+          "touhouFumo.editorFlight.size": {
+            "type": "integer",
+            "default": 56,
+            "minimum": 36,
+            "maximum": 72,
+            "scope": "window",
+            "description": "Height of Fumos flying within the active text editor (pixels)."
+          },
+          "touhouFumo.editorFlight.laneWidth": {
+            "type": "integer",
+            "default": 720,
+            "minimum": 300,
+            "maximum": 1200,
+            "scope": "window",
+            "description": "Maximum approximate horizontal flight lane (pixels). VS Code does not expose exact editor width."
+          },
+          "touhouFumo.editorFlight.enabled": {
+            "type": "boolean",
+            "default": false,
+            "scope": "window",
+            "description": "Allow dragging Fumos from Explorer or Bottom Panel into a text editor, where they spin, bounce and return. Uses only VS Code decorations; never starts native overlays."
           }
         }
       },

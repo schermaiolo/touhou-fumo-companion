@@ -27,6 +27,8 @@ import type {
 	ReactionRule
 } from './reactionRules';
 
+import type { HandoffProbeController } from './handoffProbe';
+
 /** Webview provider used by the Explorer-side stage. */
 export class ExplorerStageProvider
 	implements vscode.WebviewViewProvider {
@@ -42,7 +44,13 @@ export class ExplorerStageProvider
 			vscode.Uri,
 
 		private readonly characterSettings:
-			CharacterSettingsController
+			CharacterSettingsController,
+
+		private readonly handoffProbe:
+			HandoffProbeController,
+
+		private readonly stageName:
+			'Explorer' | 'Bottom Panel'
 	) {}
 
 	public resolveWebviewView(
@@ -65,6 +73,12 @@ export class ExplorerStageProvider
 		};
 
 		this.render(webviewView);
+
+		webviewView.webview.onDidReceiveMessage((message: unknown) => {
+			this.handoffProbe.handle(this.stageName, message, (reply) => {
+				void webviewView.webview.postMessage(reply);
+			});
+		});
 
 		webviewView.onDidDispose(() => {
 			if (this.view === webviewView) {

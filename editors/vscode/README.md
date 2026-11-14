@@ -2,12 +2,10 @@
 
 Reactive Touhou fumo companions for VS Code, with character-specific animations, editor reactions, configurable behavior, and multiple display surfaces.
 
-**Source version:** `2.0.0`.
-
 Feedback, bug reports, animation ideas, and **requests for new fumos are welcome**.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif"
+  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif?v=2.0.0"
        alt="Touhou Fumo VS Code">
 </p>
 
@@ -75,19 +73,18 @@ Leave a character's manual message empty to keep the animation while suppressing
 
 A few of the animations and reactions your Fumos can perform. There are plenty more to discover!
 
-### Drag & throw
-
-Grab a Fumo, flick her, and watch her bounce! Enable editor flight to send her through your code and back home.
-
-See the drag-and-throw recording under **New features** above.
-
-| Crazy spin | Editor Pet |
-| :---: | :---: |
-| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/crazy-spin.gif" alt="Fumos performing a crazy spin" width="180"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-editor-pet.gif" alt="Small Editor Pet following the cursor" width="220"> |
-
-| Click reactions | Writing reactions |
-| :---: | :---: |
-| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-click-reactions.gif" alt="Fumos reacting to clicks" width="270"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-writing-reactions.gif" alt="Fumos reacting while you write code" width="270"> |
+<table align="center">
+  <tr><th>Crazy spin</th><th>Editor Pet</th></tr>
+  <tr>
+    <td align="center" valign="middle"><img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/crazy-spin.gif" alt="Fumos performing a crazy spin" width="180"></td>
+    <td align="center" valign="middle"><img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-editor-pet.gif" alt="Small Editor Pet following the cursor" width="220"></td>
+  </tr>
+  <tr><th>Click reactions</th><th>Writing reactions</th></tr>
+  <tr>
+    <td align="center" valign="middle"><img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-click-reactions.gif" alt="Fumos reacting to clicks" width="260"></td>
+    <td align="center" valign="middle"><img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-writing-reactions.gif" alt="Fumos reacting while you write code" width="260"></td>
+  </tr>
+</table>
 
 ---
 
@@ -136,11 +133,13 @@ If you create or improve animation frames, contributions are welcome as well.
 
 Big thanks to **ZUN** for creating Touhou Project and its world.
 
-Special thanks to **Tim_M** ([itch.io](https://tim-m.itch.io/)) for the base fumo sprite pack used as the starting point for this project. You can find the original collection at [fumofumos.com](https://fumofumos.com/).
+Special thanks to **@Tim_M** ([itch.io](https://tim-m.itch.io/)) for the base fumo pack used as the starting point for this project, you can find them at https://fumofumos.com/.
 
-Animation ideas, additional animation frames, and the rotation/spin views used by this project were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
+So, starting from the base idle fumo: animation ideas, additional animation frames, and the rotation/spin views were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
 
-Help with improving existing sprites and adding new fumos is always welcome.
+Help on fixing them/adding new ones is always welcome!
+
+![Hand-edited animation and rotation sheet](assets/characters/youmu/youmu-sheet.png)
 
 ---
 

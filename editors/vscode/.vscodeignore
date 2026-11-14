@@ -12,3 +12,8 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 **/.vscode-test.*
+
+# Exclude development experiments and previous VSIX packages
+**/*.vsix
+docs/**
+tools/**

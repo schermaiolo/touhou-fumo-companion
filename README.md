@@ -10,7 +10,7 @@
 
 <p align="center">
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/schermaiolo.touhou-fumo-companion?style=for-the-badge&label=VS%20Code%20Marketplace&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
+[![VS Code Marketplace](https://img.shields.io/badge/VS_Code-Marketplace-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
 [![Open VSX Registry](https://img.shields.io/open-vsx/v/schermaiolo/touhou-fumo-companion?style=for-the-badge&label=Open%20VSX)](https://open-vsx.org/extension/schermaiolo/touhou-fumo-companion)
 [![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Official%20Plugin-5B5BD6?style=for-the-badge)](https://github.com/pragtical/plugins/pull/47)
 
@@ -18,11 +18,9 @@
 
 Reactive Touhou fumo companions for **VS Code**, **Open VSX / Code-OSS compatible editors**, and **Pragtical**.
 
-**Current source version:** `2.0.0`. The marketplace badges above show the versions already published to each registry.
-
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif"
+    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif?v=2.0.0"
     alt="Touhou Fumo Spin"
   >
 </p>

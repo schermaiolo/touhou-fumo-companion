@@ -7,7 +7,7 @@ Reactive Touhou fumo companions for Pragtical, with native settings, stage anima
 Feedback, bug reports, animation ideas, and **requests for new fumos are welcome**.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif"
+  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/spin-showcase.gif?v=2.0.0"
        alt="Touhou Fumo VS Code">
 </p>
 
@@ -128,11 +128,13 @@ Bug reports, feedback, animation ideas, and **requests for new fumos** are welco
 
 Big thanks to **ZUN** for creating Touhou Project and its world.
 
-Special thanks to **Tim_M** ([itch.io](https://tim-m.itch.io/)) for the base fumo sprite pack used as the starting point for this project. You can find the original collection at [fumofumos.com](https://fumofumos.com/).
+Special thanks to **@Tim_M** ([itch.io](https://tim-m.itch.io/)) for the base fumo pack used as the starting point for this project, you can find them at https://fumofumos.com/.
 
-Animation ideas, additional animation frames, and the rotation/spin views used by this project were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
+So, starting from the base idle fumo: animation ideas, additional animation frames, and the rotation/spin views were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
 
-Help with improving existing sprites and adding new fumos is always welcome.
+Help on fixing them/adding new ones is always welcome!
+
+![Hand-edited animation and rotation sheet](assets/characters/youmu/youmu-sheet.png)
 
 ---
 

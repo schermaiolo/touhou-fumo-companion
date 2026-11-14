@@ -2,6 +2,14 @@
 
 All notable changes to Touhou Fumo Companion will be documented here.
 
+## [2.0.0] - 2026-11-14
+
+### Added
+
+- Grab-and-throw physics for Fumos in the Explorer and Bottom Panel stages, with gravity, bouncing, and return-home behavior (opt-in).
+- Optional editor flight: Fumos can fly and bounce through the text editor before returning to their stage.
+- A refined and superior settings page.
+
 ## [1.3.1] - 2026-10-28
 
 ### Fixed

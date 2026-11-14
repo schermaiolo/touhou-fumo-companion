@@ -226,6 +226,36 @@ export class CharacterSettingsController
 		);
 	}
 
+	/** Read a copy of persistent profiles for the dedicated settings page. */
+	public getSettingsProfiles(): Record<string, Record<string, unknown>> {
+		const result: Record<string, Record<string, unknown>> = {};
+		for (const character of CHARACTER_DEFINITIONS) {
+			result[character.id] = { ...this.getProfile(character) };
+		}
+		return result;
+	}
+
+	/** Update one profile without depending on native Settings proxy event ordering. */
+	public async setSettingsProfileField(
+		id: string,
+		field: string,
+		value: unknown
+	): Promise<void> {
+		const character = CHARACTER_DEFINITIONS.find((item) => item.id === id);
+		if (!character || !EDITOR_FIELDS.some((item) => item === field)) {
+			throw new Error('Unknown character setting');
+		}
+		const current = this.getProfile(character);
+		const next = normalizeProfile({ ...current, [field]: value }, current);
+		await this.context.globalState.update(PROFILE_STORAGE_KEY, {
+			...this.getProfiles(),
+			[id]: next
+		});
+		if (this.getSelectedCharacterId() === id) {
+			await this.loadSelectedCharacterIntoEditor();
+		}
+	}
+
 	public dispose(): void {
 		this.disposed = true;
 	}

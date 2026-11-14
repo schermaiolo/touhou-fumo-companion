@@ -249,6 +249,42 @@ export class ReactionRulesController
 		});
 	}
 
+	/** Read a copy of all reaction slots for the dedicated settings page. */
+	public getSettingsRules(): ReactionRule[] {
+		return this.getRules().map((rule) => ({ ...rule }));
+	}
+
+	/** Change a single slot, retaining the native editor's conflict policy. */
+	public async setSettingsRuleField(
+		index: number,
+		field: string,
+		value: unknown
+	): Promise<void> {
+		if (
+			!Number.isInteger(index) || index < 1 || index > RULE_COUNT ||
+			!EDITOR_FIELDS.some((item) => item === field)
+		) {
+			throw new Error('Unknown reaction rule field');
+		}
+		const rules = [...this.getRules()];
+		const current = rules[index - 1] ?? blankRule();
+		const changed = normalizeRule({ ...current, [field]: value }, current);
+		rules[index - 1] = changed;
+		if (changed.enabled) {
+			for (let other = 0; other < rules.length; other += 1) {
+				if (other !== index - 1 && rulesConflict(changed, rules[other])) {
+					rules[other] = { ...rules[other], enabled: false };
+				}
+			}
+		}
+		await this.context.globalState.update(STORAGE_KEY, rules);
+		const selected = vscode.workspace.getConfiguration('touhouFumo')
+			.get<number>(`${PREFIX}.selected`, 1);
+		if (selected === index) {
+			await this.loadSelectedRuleIntoEditor();
+		}
+	}
+
 	public dispose(): void {
 		this.disposed = true;
 	}

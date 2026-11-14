@@ -11,6 +11,7 @@
  * file stays focused on orchestration and lifecycle.
  */
 import * as vscode from 'vscode';
+import { FumoSettingsPanel } from './settingsPanel';
 
 import {
 	EditorPetController
@@ -227,6 +228,15 @@ export function activate(
 		}
 	};
 
+	const settingsPanel = new FumoSettingsPanel(
+		context, characterSettings, reactionRules, () => {
+			explorerStage.reload();
+			bottomPanelStage.reload();
+			codingSession.reload();
+		}
+	);
+	context.subscriptions.push(settingsPanel);
+
 	let lastTypingReactionAt = 0;
 
 	context.subscriptions.push(
@@ -299,10 +309,7 @@ export function activate(
 
 		vscode.commands.registerCommand(
 			'touhouFumo.openSettings',
-			() => vscode.commands.executeCommand(
-				'workbench.action.openSettings',
-				'touhouFumo'
-			)
+			() => settingsPanel.show()
 		),
 
 		...(['custom1', 'custom2', 'custom3', 'custom4'] as const)

@@ -376,14 +376,6 @@
             "scope": "window",
             "description": "Enable drag, flick, gravity and bounce INSIDE the stage only. Native desktop overlays are disabled."
           },
-          "touhouFumo.editorFlight.size": {
-            "type": "integer",
-            "default": 56,
-            "minimum": 36,
-            "maximum": 72,
-            "scope": "window",
-            "description": "Height of Fumos flying within the active text editor (pixels)."
-          },
           "touhouFumo.editorFlight.laneWidth": {
             "type": "integer",
             "default": 720,

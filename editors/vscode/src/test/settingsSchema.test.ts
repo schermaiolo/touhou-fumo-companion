@@ -1,3 +1,7 @@
+/**
+ * Regression coverage for the settings webview's manifest mapping, type checks,
+ * and workspace-over-user precedence. No VS Code extension host is required.
+ */
 import * as assert from 'node:assert/strict';
 import { getSettingsDescriptors, isValidSettingValue, preferredSettingsScope } from '../settingsSchema';
 

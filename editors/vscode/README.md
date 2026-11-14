@@ -2,6 +2,8 @@
 
 Reactive Touhou fumo companions for VS Code, with character-specific animations, editor reactions, configurable behavior, and multiple display surfaces.
 
+**Source version:** `2.0.0`.
+
 Feedback, bug reports, animation ideas, and **requests for new fumos are welcome**.
 
 <p align="center">
@@ -11,17 +13,22 @@ Feedback, bug reports, animation ideas, and **requests for new fumos are welcome
 
 ---
 
-## New Fumo Section: Cirno
+## New features — Grab, throw, and customize!
 
-The strongest joins the roster. She even studied this time.
-For one brief, glorious moment, Cirno becomes smort.
+No new Fumo this time. Instead, the whole crew has learned a few new tricks.
+
+- **Throw your Fumos across the editor!** Grab and flick a Fumo from the Explorer or Bottom Panel, with gravity and bouncy landings. Optionally enable **Bounce inside the code editor** to send her flying through your code before she returns home.
+- **A friendlier Settings page.** Customize everything in one place, with clear **Basics**, **Fumos**, **Movement**, **Reaction Rules**, and **Advanced** tabs — including a sprite preview for each Fumo. Changes are saved as you make them.
+
+Open **Touhou Fumo Companion: Open Settings** and visit **Movement → Grab & throw** to enable the physics features. Both grab-and-throw and editor flight are optional and disabled by default.
 
 <p align="center">
-  <img
-    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/cirno.gif"
-    alt="Cirno"
-  >
+  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/drag-and-throw.gif" alt="Dragging and throwing Fumos across the VS Code editor" width="900">
 </p>
+
+| Movement settings | Fumo-specific settings |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/settings-movement.png" alt="Movement settings including grab and throw" width="480"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/settings-fumos.png" alt="Fumo settings with character sprite preview" width="480"> |
 
 ---
 
@@ -32,6 +39,8 @@ For one brief, glorious moment, Cirno becomes smort.
 - Integrated bottom-panel stage.
 - Large Coding Session below the source editor.
 - Small Editor Pet near the active line.
+- Grab-and-throw physics, with gravity and bouncing in the Explorer and Bottom Panel.
+- Optional editor flight: throw a Fumo into your code and watch her bounce back home.
 - Click/manual reactions with per-character messages.
 - Typing, newline, save, build, debug, exact-text, and custom reaction rules.
 - Blink, software movement (hops), unique animations, normal spin, and crazy spin.
@@ -62,37 +71,23 @@ Leave a character's manual message empty to keep the animation while suppressing
 
 ---
 
-## Fumo showcase
+## Fumos in action
 
-These are only some of the available animations and behaviors.
+A few of the animations and reactions your Fumos can perform. There are plenty more to discover!
 
-### Crazy spin
+### Drag & throw
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/crazy-spin.gif"
-       alt="Crazy spin">
-</p>
+Grab a Fumo, flick her, and watch her bounce! Enable editor flight to send her through your code and back home.
 
-### Editor Pet
+See the drag-and-throw recording under **New features** above.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-editor-pet.gif"
-       alt="Editor Pet">
-</p>
+| Crazy spin | Editor Pet |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/crazy-spin.gif" alt="Fumos performing a crazy spin" width="180"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-editor-pet.gif" alt="Small Editor Pet following the cursor" width="220"> |
 
-### Click reactions
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-click-reactions.gif"
-       alt="Click reactions">
-</p>
-
-### Writing reactions
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-writing-reactions.gif"
-       alt="Writing reactions">
-</p>
+| Click reactions | Writing reactions |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-click-reactions.gif" alt="Fumos reacting to clicks" width="270"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-writing-reactions.gif" alt="Fumos reacting while you write code" width="270"> |
 
 ---
 
@@ -115,11 +110,17 @@ The Explorer and Bottom Panel title buttons expose the same React, Spin, Crazy S
 
 ## Settings
 
-General defaults cover size, idle movement, random unique animations, random spin, crazy spin, and animation priority.
+Use **Touhou Fumo Companion: Open Settings** for the dedicated settings page. Changes are saved automatically, and most settings take effect without restarting VS Code.
 
-The **Selected Character** section lets each fumo override those defaults, including its enabled state and manual message.
+- **Basics** — choose the Explorer stage, Bottom Panel, Coding Session, or Editor Pet.
+- **Fumos** — select and customize each Fumo, with a sprite preview and optional per-Fumo overrides.
+- **Movement** — adjust grab-and-throw physics, optional editor flight, and global animation defaults.
+- **Reaction Rules** — customize coding events, animations, speech bubbles, and which Fumos react.
+- **Advanced** — tune animation priorities and access the native VS Code settings.
 
-Reaction Rules provide reusable event/action slots that can target all enabled fumos, one character, or a random enabled character.
+To throw Fumos, enable **Enable grab-and-throw physics** under **Movement → Grab & throw**. To allow them to bounce through your code, also enable **Bounce inside the code editor**. Both options are off by default.
+
+See the Movement and Fumos screenshots in **New features** above.
 
 ---
 

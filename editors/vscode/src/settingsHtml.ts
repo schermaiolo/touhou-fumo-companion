@@ -1,4 +1,8 @@
-/** Accessible, CSP-protected local webview. All user values are rendered with textContent. */
+/**
+ * Self-contained settings webview: rendering only, never the settings source of truth.
+ * The extension host validates and saves changes before sending refreshed state.
+ * A nonce-based CSP and textContent for user-controlled strings avoid HTML injection.
+ */
 export function getSettingsHtml(nonce: string, cspSource: string): string {
 	return String.raw`<!DOCTYPE html>
 <html lang="en">

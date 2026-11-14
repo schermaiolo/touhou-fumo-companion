@@ -10,17 +10,15 @@
 
 <p align="center">
 
-<p align="center">
-
-[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-v1.3.0-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/schermaiolo.touhou-fumo-companion?style=for-the-badge&label=VS%20Code%20Marketplace&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=schermaiolo.touhou-fumo-companion)
 [![Open VSX Registry](https://img.shields.io/open-vsx/v/schermaiolo/touhou-fumo-companion?style=for-the-badge&label=Open%20VSX)](https://open-vsx.org/extension/schermaiolo/touhou-fumo-companion)
 [![Pragtical Plugin](https://img.shields.io/badge/Pragtical-Official%20Plugin-5B5BD6?style=for-the-badge)](https://github.com/pragtical/plugins/pull/47)
 
 </p>
 
-</p>
-
 Reactive Touhou fumo companions for **VS Code**, **Open VSX / Code-OSS compatible editors**, and **Pragtical**.
+
+**Current source version:** `2.0.0`. The marketplace badges above show the versions already published to each registry.
 
 <p align="center">
   <img
@@ -37,17 +35,33 @@ Animated fumos can react to editor events, spin, perform character-specific anim
 
 ---
 
-## New Fumo Section: Cirno
+## New features — Grab, throw, and customize!
 
-The strongest joins the roster. She even studied this time.
-For one brief, glorious moment, Cirno becomes smort.
+No new Fumo this time. Instead, the whole crew has learned a few new tricks.
+
+- **VS Code: Throw your Fumos across the editor!** Grab and flick a Fumo from the Explorer or Bottom Panel, with gravity and bouncy landings. Optionally enable **Bounce inside the code editor** to send her flying through your code before she returns home.
+- **Pragtical: Grab & throw too!** Drag a stage Fumo around the Pragtical window, flick to launch, and watch her bounce before returning home. Enabled by default on fresh installs, with ordinary click reactions still intact.
+- **VS Code: A friendlier Settings page.** Customize everything in one place, with clear **Basics**, **Fumos**, **Movement**, **Reaction Rules**, and **Advanced** tabs — including a sprite preview for each Fumo. Changes are saved as you make them.
+
+In VS Code, open **Touhou Fumo Companion: Open Settings → Movement → Grab & throw**. Both physics options start disabled. In Pragtical, **Grab & Throw** is enabled by default for new installations and can be disabled under **Settings → Plugins → Touhou Fumo Companion**.
+
+**VS Code drag-and-throw demonstration:**
 
 <p align="center">
-  <img
-    src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/cirno.gif"
-    alt="Cirno"
-  >
+  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/drag-and-throw.gif" alt="Fumos bouncing through the VS Code editor" width="900">
 </p>
+
+**Pragtical grab-and-throw demonstration:**
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-grab-and-throw.gif" alt="Dragging, throwing, and bouncing Fumos across the Pragtical window" width="900">
+</p>
+
+**New VS Code settings:**
+
+| Movement | Individual Fumos |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/settings-movement.png" alt="Movement settings" width="480"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/settings-fumos.png" alt="Character settings and preview" width="480"> |
 
 ---
 
@@ -90,9 +104,9 @@ Bug reports, feedback, animation ideas, and **requests for new fumos** are welco
 
 ## Credits
 
-Naturally, big thanks for ZUN for creating Gensokyo and Touhou universe.
+Big thanks to **ZUN** for creating Touhou Project and its world.
 
-Special thanks to **@Tim_M** ([itch.io](https://tim-m.itch.io/))for the base fumo pack used as the starting point for this project, you can find them at https://fumofumos.com/.
+Special thanks to **@Tim_M** ([itch.io](https://tim-m.itch.io/)) for the base fumo pack used as the starting point for this project, you can find them at https://fumofumos.com/.
 
 So, starting from the base idle fumo: animation ideas, additional animation frames, and the rotation/spin views were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
 

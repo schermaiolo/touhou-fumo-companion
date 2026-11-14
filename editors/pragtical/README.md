@@ -1,5 +1,7 @@
 # Touhou Fumo Companion — Pragtical
 
+**Source version:** `2.0.0`.
+
 Reactive Touhou fumo companions for Pragtical, with native settings, stage animations, editor reactions, and a small cursor-following Editor Pet.
 
 Feedback, bug reports, animation ideas, and **requests for new fumos are welcome**.
@@ -14,6 +16,7 @@ Feedback, bug reports, animation ideas, and **requests for new fumos are welcome
 ## Features
 
 - Multiple enabled characters on the stage.
+- **Grab & Throw** physics (enabled by default for new installations): pick up a stage Fumo, flick her across the Pragtical window, bounce, and return home. Ordinary clicks still trigger manual reactions.
 - Optional small Editor Pet near the active cursor/line.
 - Per-character size and behavior settings.
 - Click/manual reactions with configurable messages.
@@ -32,6 +35,9 @@ Feedback, bug reports, animation ideas, and **requests for new fumos are welcome
 - Seija Kijin
 - Sanae Kochiya
 - Reimu Hakurei — Lost Word
+- Fujiwara no Mokou
+- Alice Margatroid
+- Cirno
 
 Default manual messages include:
 
@@ -43,30 +49,29 @@ An empty manual message keeps the animation but suppresses the bubble.
 
 ---
 
-## Fumo showcase (not all animations)
+## Fumos in action
 
-### Crazy Spin
+Here are a few examples of the animations and interactions. More reactions are available through the plugin's rules and per-Fumo settings.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-crazy-spin.gif"
-       alt="Crazy spin">
-</p>
+### Grab & throw
 
-
-### Editor Pet
+Grab a stage Fumo from her usual spot, flick her across the Pragtical window, and watch her bounce before returning home. This works **out of the box** on fresh installs. A normal click still triggers the Fumo's manual reaction.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-editor-pet.gif"
-       alt="Fumo editor pet">
+  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-grab-and-throw.gif" alt="Pragtical Fumos being grabbed, thrown, bouncing, and returning to their home positions" width="900">
 </p>
 
+### Animation gallery
 
-### Click reactions
+| Crazy spin | Editor Pet |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-crazy-spin.gif" alt="Crazy spin in Pragtical" width="250"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-editor-pet.gif" alt="Cursor-adjacent Editor Pet in Pragtical" width="250"> |
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-click-reactions.gif"
-       alt="Fumo click reactions">
-</p>
+| Click reactions | Typing reactions (VS Code example) |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/pragtical/images/pragtical-click-reactions.gif" alt="Fumo click reactions in Pragtical" width="280"> | <img src="https://raw.githubusercontent.com/schermaiolo/touhou-fumo-companion/main/editors/vscode/images/vscode-writing-reactions.gif" alt="Typing-triggered Fumo reactions demonstrated in VS Code" width="280"> |
+
+*The typing-reaction GIF was recorded in VS Code; Pragtical also supports configurable typing and newline reactions.*
 
 ---
 
@@ -94,7 +99,7 @@ Open:
 Settings → Plugins → Touhou Fumo Companion
 ```
 
-The settings page exposes general defaults, a selected-character configuration proxy, Editor Pet controls, and reusable reaction-rule slots.
+The settings page exposes general defaults, **Grab & Throw** (on by default for new installations), a selected-character configuration proxy, Editor Pet controls, and reusable reaction-rule slots. Dragging works only on stage Fumos; the Editor Pet remains click-to-react.
 
 ---
 
@@ -121,13 +126,13 @@ Bug reports, feedback, animation ideas, and **requests for new fumos** are welco
 
 ## Credits
 
-Naturally, big thanks for ZUN for creating Gensokyo and Touhou universe.
+Big thanks to **ZUN** for creating Touhou Project and its world.
 
-Special thanks to **@Tim_M** (I didn't find him on git, but here https://tim-m.itch.io/)for the base fumo pack used as the starting point for this project, you can find them at https://fumofumos.com/.
+Special thanks to **Tim_M** ([itch.io](https://tim-m.itch.io/)) for the base fumo sprite pack used as the starting point for this project. You can find the original collection at [fumofumos.com](https://fumofumos.com/).
 
-Animation ideas, additional animation frames, and the rotation/spin views were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
+Animation ideas, additional animation frames, and the rotation/spin views used by this project were created and edited manually by me, pixel by pixel. Building the animated turnaround sets was a long manual process.
 
-Help on fixing them/adding new ones is always welcome!
+Help with improving existing sprites and adding new fumos is always welcome.
 
 ---
 

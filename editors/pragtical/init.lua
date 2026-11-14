@@ -72,6 +72,8 @@ local default_settings = {
   left_margin = 18,
   bottom_margin = 75,
   gap = 0,
+  -- Opt-out: existing saved false values still override this fresh-install default.
+  grab_throw_enabled = true,
   typing_reaction_cooldown = 0.22,
 
   editor_pet_enabled = false,
@@ -502,6 +504,13 @@ local config_spec = {
     default = 0,
     min = 0,
     max = 100
+  },
+  {
+    label = "Grab & Throw",
+    description = "Drag and throw stage Fumos around the Pragtical window. Clicks still trigger reactions. Enabled by default; disable to retain click-only behavior.",
+    path = "grab_throw_enabled",
+    type = "toggle",
+    default = true
   },
   {
     label = "Default Size",
@@ -977,7 +986,8 @@ local function create_pet(definition)
     was_enabled = false,
     stage_hit_x = 0,
     stage_hit_y = 0,
-    stage_hit_visible = false
+    stage_hit_visible = false,
+    throw_state = nil
   }
 
   pet.next_motion_at = schedule_by_frequency(
@@ -1327,13 +1337,77 @@ local function evaluate_random_actions(pet, now)
   end
 end
 
+-- Deliberately window-local: never starts a native desktop overlay.
+-- The stage's bottom_margin controls only the resting/home position. Physics
+-- must use the actual Pragtical window floor, independent of that setting.
+-- Leave a small gap above the bottom UI so the sprite stays visible.
+local function throw_floor_y(pet)
+  return math.max(0, core.root_view.size.y - pet.height - 24)
+end
+
+-- Drag suspends idle actions; flight updates an independent position until either
+-- settling or timing out, then return interpolates to the configured home slot.
+-- Returning true suppresses normal animation scheduling during these phases.
+local function update_throw(pet, now)
+  local state = pet.throw_state
+  if not state then return false end
+  if state.phase == "drag" then return true end
+  if state.phase == "return" then
+    if now - state.return_started >= 0.42 then
+      pet.throw_state = nil
+      reschedule_all(pet, now)
+    end
+    return true
+  end
+
+  local dt = clamp(now - state.last_t, 0, 0.05)
+  state.last_t = now
+  local bounds_x = math.max(0, core.root_view.size.x - pet.width)
+  local floor_y = throw_floor_y(pet)
+
+  state.vy = math.min(1750, state.vy + 1350 * dt)
+  state.x = state.x + state.vx * dt
+  state.y = state.y + state.vy * dt
+
+  if state.x < 0 then
+    state.x = 0
+    state.vx = math.abs(state.vx) * 0.65
+  elseif state.x > bounds_x then
+    state.x = bounds_x
+    state.vx = -math.abs(state.vx) * 0.65
+  end
+  if state.y < 0 then
+    state.y = 0
+    state.vy = math.abs(state.vy) * 0.55
+  elseif state.y >= floor_y then
+    state.y = floor_y
+    state.vy = -math.abs(state.vy) * 0.55
+    state.vx = state.vx * 0.82
+    if math.abs(state.vy) < 70 then state.vy = 0 end
+  end
+
+  if state.y == floor_y and state.vy == 0 then
+    state.vx = state.vx * math.max(0, 1 - 4 * dt)
+    if math.abs(state.vx) < 15 then state.vx = 0 end
+    state.rest_time = state.rest_time + dt
+  else
+    state.rest_time = 0
+  end
+  if now - state.born >= 4.5 or state.rest_time >= 0.8 then
+    state.phase = "return"
+    state.return_started = now
+  end
+  return true
+end
+
 local function update_pet(pet, now)
   refresh_pet_size(pet)
+  if not settings.grab_throw_enabled then pet.throw_state = nil end
 
   local stage_enabled = is_pet_enabled(pet)
 
   if stage_enabled and not pet.was_enabled then
-    if #pet.spin_frames > 0 then
+    if #pet.spin_frames > 0 and not pet.throw_state then
       request_action(
         pet,
         make_crazy_spin_action(pet, "manual", "", "normal"),
@@ -1346,7 +1420,13 @@ local function update_pet(pet, now)
 
   pet.was_enabled = stage_enabled
 
-  if not is_pet_active(pet) then return end
+  if not is_pet_active(pet) then
+    pet.throw_state = nil
+    return
+  end
+
+  -- Flight and grabbing take precedence over random/crazy-spin actions.
+  if update_throw(pet, now) then return end
 
   update_action(pet, now)
   evaluate_random_actions(pet, now)
@@ -1711,9 +1791,27 @@ function RootView:draw()
       local normal_y = floor_y - pet.height + motion_offset(pet, now)
       local falling_y = crazy_y(pet, now)
       local y = falling_y or normal_y
+      local draw_x = x
+      local state = pet.throw_state
+      if state then
+        if state.phase == "return" then
+          local progress = clamp(
+            (now - state.return_started) / 0.42, 0, 1)
+          local eased = 1 - (1 - progress) ^ 3
+          draw_x = state.x + (x - state.x) * eased
+          y = state.y + (normal_y - state.y) * eased
+        else
+          draw_x, y = state.x, state.y
+        end
+        if #pet.spin_frames > 0 and state.phase == "flight" then
+          local index = math.floor((now - state.born) * 13)
+            % #pet.spin_frames + 1
+          frame = pet.frames[pet.spin_frames[index]] or frame
+        end
+      end
 
       if frame then
-        pet.stage_hit_x = math.floor(x)
+        pet.stage_hit_x = math.floor(draw_x)
         pet.stage_hit_y = math.floor(y)
         pet.stage_hit_visible = true
 
@@ -1724,7 +1822,7 @@ function RootView:draw()
         )
       end
 
-      draw_pet_message(pet, x, y)
+      draw_pet_message(pet, draw_x, y)
       x = x + pet.width + settings.gap
     end
   end
@@ -1739,94 +1837,150 @@ end
 -- RootView:draw() is still wrapped exactly once.
 -----------------------------------------------------------------------
 
-local parent_on_mouse_pressed =
-  RootView.on_mouse_pressed
+local parent_on_mouse_pressed = RootView.on_mouse_pressed
+local parent_on_mouse_moved = RootView.on_mouse_moved
+local parent_on_mouse_released = RootView.on_mouse_released
+local parent_on_focus_lost = RootView.on_focus_lost
+
+local grabbed_pet = nil
+local grab_start_x, grab_start_y = 0, 0
+local grab_offset_x, grab_offset_y = 0, 0
+local grab_last_x, grab_last_y, grab_last_time = 0, 0, 0
+local grab_vx, grab_vy = 0, 0
+local moved_while_grabbed = false
 
 local function point_inside(x, y, px, py, width, height)
-  return
-    x >= px and
-    x < px + width and
-    y >= py and
-    y < py + height
+  return x >= px and x < px + width and
+    y >= py and y < py + height
 end
 
 local function manual_react_pet(pet)
   if not pet then return false end
-
-  local text =
-    raw_pet_setting(pet, "manual_message") or ""
-
+  local text = raw_pet_setting(pet, "manual_message") or ""
   request_action(
-    pet,
-    make_special_action(
-      pet,
-      "manual",
-      text,
-      "normal"
-    ),
-    system.get_time(),
-    true
+    pet, make_special_action(pet, "manual", text, "normal"),
+    system.get_time(), true
   )
-
   core.redraw = true
   return true
 end
 
--- Hit-test our cached sprite rectangles first; delegate every unhandled click
--- to Pragtical's original RootView handler so editor input remains untouched.
+local function clear_grab()
+  if grabbed_pet and grabbed_pet.throw_state and
+     grabbed_pet.throw_state.phase == "drag" then
+    grabbed_pet.throw_state = nil
+  end
+  grabbed_pet = nil
+  moved_while_grabbed = false
+  grab_vx, grab_vy = 0, 0
+  core.redraw = true
+end
+
+-- Stage Fumos only. The cursor-adjacent Editor Pet remains click-to-react.
+-- Consuming the press prevents Pragtical text selection/tab dragging beneath.
 function RootView:on_mouse_pressed(button, x, y, clicks)
-  local primary_button =
-    button == "left" or
-    button == 1
-
-  if settings.enabled and primary_button then
-    if
-      editor_pet_cache.visible and
-      point_inside(
-        x,
-        y,
-        editor_pet_cache.x,
-        editor_pet_cache.y,
-        editor_pet_cache.width,
-        editor_pet_cache.height
-      )
-    then
-      local pet =
-        find_pet_by_id(editor_pet_cache.pet_id)
-
-      if manual_react_pet(pet) then
-        return true
-      end
+  local primary = button == "left" or button == 1
+  if settings.enabled and primary then
+    if editor_pet_cache.visible and point_inside(
+      x, y, editor_pet_cache.x, editor_pet_cache.y,
+      editor_pet_cache.width, editor_pet_cache.height
+    ) then
+      return manual_react_pet(find_pet_by_id(editor_pet_cache.pet_id))
     end
 
     for index = #pets, 1, -1 do
       local pet = pets[index]
-
-      if
-        pet.stage_hit_visible and
-        point_inside(
-          x,
-          y,
-          pet.stage_hit_x,
-          pet.stage_hit_y,
-          pet.width,
-          pet.height
-        )
-      then
-        if manual_react_pet(pet) then
+      if pet.stage_hit_visible and point_inside(
+        x, y, pet.stage_hit_x, pet.stage_hit_y, pet.width, pet.height
+      ) then
+        if settings.grab_throw_enabled then
+          grabbed_pet = pet
+          grab_start_x, grab_start_y = x, y
+          grab_offset_x = x - pet.stage_hit_x
+          grab_offset_y = y - pet.stage_hit_y
+          grab_last_x, grab_last_y = x, y
+          grab_last_time = system.get_time()
+          grab_vx, grab_vy = 0, 0
+          moved_while_grabbed = false
           return true
         end
+        return manual_react_pet(pet)
       end
     end
   end
+  return parent_on_mouse_pressed(self, button, x, y, clicks)
+end
 
-  return parent_on_mouse_pressed(
-    self,
-    button,
-    x,
-    y,
-    clicks
-  )
+function RootView:on_mouse_moved(x, y, dx, dy)
+  if grabbed_pet and
+     (not settings.enabled or not settings.grab_throw_enabled) then
+    clear_grab()
+  end
+  if grabbed_pet then
+    local pet = grabbed_pet
+    local now = system.get_time()
+    if not moved_while_grabbed and
+       ((x - grab_start_x) ^ 2 + (y - grab_start_y) ^ 2) > 25 then
+      moved_while_grabbed = true
+      pet.current_action = nil
+      pet.pending_action = nil
+      pet.motion_active = false
+      pet.throw_state = {
+        phase = "drag", x = pet.stage_hit_x, y = pet.stage_hit_y
+      }
+    end
+    if moved_while_grabbed then
+      local dt = now - grab_last_time
+      if dt > 0.001 then
+        grab_vx = clamp((x - grab_last_x) / dt, -1200, 1200)
+        grab_vy = clamp((y - grab_last_y) / dt, -1200, 1200)
+      end
+      local state = pet.throw_state
+      if state then
+        state.x = clamp(x - grab_offset_x, 0,
+          math.max(0, core.root_view.size.x - pet.width))
+        state.y = clamp(y - grab_offset_y, 0, throw_floor_y(pet))
+      end
+    end
+    grab_last_x, grab_last_y, grab_last_time = x, y, now
+    core.redraw = true
+    return true
+  end
+  return parent_on_mouse_moved(self, x, y, dx, dy)
+end
+
+function RootView:on_mouse_released(button, x, y, ...)
+  if grabbed_pet and
+     (not settings.enabled or not settings.grab_throw_enabled) then
+    clear_grab()
+  end
+  if grabbed_pet and (button == "left" or button == 1) then
+    local pet = grabbed_pet
+    if moved_while_grabbed and pet.throw_state then
+      local state = pet.throw_state
+      state.phase = "flight"
+      state.vx, state.vy = grab_vx, grab_vy
+      state.born = system.get_time()
+      state.last_t = state.born
+      state.rest_time = 0
+      grabbed_pet = nil
+      moved_while_grabbed = false
+      core.redraw = true
+    else
+      clear_grab()
+      manual_react_pet(pet)
+    end
+    return true
+  end
+  return parent_on_mouse_released(self, button, x, y, ...)
+end
+
+-- Avoid a stuck drag when the OS stops delivering mouse events.
+function RootView:on_focus_lost(...)
+  clear_grab()
+  if parent_on_focus_lost then
+    return parent_on_focus_lost(self, ...)
+  end
 end
 
 -----------------------------------------------------------------------
@@ -1845,6 +1999,10 @@ end
 command.add(nil, {
   ["touhou-fumo:toggle"] = function()
     settings.enabled = not settings.enabled
+    if not settings.enabled then
+      clear_grab()
+      for _, pet in ipairs(pets) do pet.throw_state = nil end
+    end
     core.redraw = true
   end,
 
